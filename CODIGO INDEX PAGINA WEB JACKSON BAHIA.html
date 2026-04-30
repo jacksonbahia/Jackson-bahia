@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Jackson Bahía Cia | Academy</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Plus+Jakarta+Sans:wght@300;400;600&display=swap" rel="stylesheet"/>
+    <style>
+        :root {
+            --rojo: #C8102E; --dorado: #D4AF37; --oscuro: #0a0a0a; --crema: #f8f1e7;
+            --glass: rgba(255, 255, 255, 0.05); --glass-border: rgba(255, 255, 255, 0.1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
+        body { background-color: var(--oscuro); color: var(--crema); min-height: 100vh; overflow-x: hidden; }
+
+        /* Fondo */
+        .hero-bg {
+            position: fixed; inset: 0; z-index: -1;
+            background: linear-gradient(to bottom, rgba(10, 10, 10, 0.8), rgba(10, 10, 10, 0.95)),
+                        url('https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?auto=format&fit=crop&q=80&w=2000') center/cover;
+        }
+
+        .container { max-width: 500px; margin: 0 auto; padding: 40px 20px; }
+
+        /* Auth Styles */
+        .auth-card {
+            background: var(--glass); backdrop-filter: blur(15px); border: 1px solid var(--glass-border);
+            padding: 30px; border-radius: 24px; text-align: center; margin-top: 20px;
+        }
+        input {
+            width: 100%; padding: 14px; margin-bottom: 12px; border-radius: 12px;
+            border: 1px solid var(--glass-border); background: rgba(0,0,0,0.3); color: white;
+        }
+        .btn {
+            width: 100%; padding: 14px; border-radius: 12px; border: none; font-weight: 600;
+            cursor: pointer; transition: 0.3s; margin-top: 10px;
+        }
+        .btn-gold { background: var(--dorado); color: var(--oscuro); }
+        .btn-red { background: var(--rojo); color: white; }
+
+        /* Courses */
+        .course-card {
+            background: var(--glass); border: 1px solid var(--glass-border);
+            padding: 20px; border-radius: 20px; margin-bottom: 15px;
+            display: flex; align-items: center; justify-content: space-between;
+            transition: 0.3s;
+        }
+        .locked { opacity: 0.6; filter: grayscale(1); cursor: not-allowed; }
+        .unlocked { border-color: var(--dorado); cursor: pointer; }
+        
+        /* Video Modal */
+        .modal {
+            position: fixed; inset: 0; background: rgba(0,0,0,0.95);
+            display: none; align-items: center; justify-content: center; z-index: 1000;
+        }
+        .modal-content { width: 90%; max-width: 800px; aspect-ratio: 16/9; }
+        .close-modal { position: absolute; top: 20px; right: 20px; font-size: 2rem; cursor: pointer; }
+
+        /* Admin Panel */
+        .admin-panel { display: none; background: rgba(212, 175, 55, 0.1); padding: 20px; border-radius: 15px; margin-top: 20px; }
+
+        .hidden { display: none; }
+    </style>
+</head>
+<body>
+
+    <div class="hero-bg"></div>
+
+    <div class="container">
+        <!-- Header -->
+        <header style="text-align: center; margin-bottom: 40px;">
+            <h1 style="font-family: 'Playfair Display'; font-size: 2.2rem; color: var(--dorado);">Jackson Bahía Cia</h1>
+            <p id="userWelcome" style="font-size: 0.8rem; margin-top: 5px; color: var(--dorado);"></p>
+        </header>
+
+        <!-- Auth Section -->
+        <div id="authSection" class="auth-card">
+            <h2 id="authTitle">Iniciar Sesión</h2>
+            <p id="authSwitchText" style="font-size: 0.8rem; margin-bottom: 20px; color: #888;">¿No tienes cuenta? <a href="#" onclick="toggleAuth()" style="color: var(--dorado)">Regístrate</a></p>
+            <input type="email" id="email" placeholder="Correo electrónico">
+            <input type="password" id="password" placeholder="Contraseña">
+            <button class="btn btn-gold" id="authBtn" onclick="handleAuth()">Entrar</button>
+        </div>
+
+        <!-- Main Content (Hidden by default) -->
+        <div id="mainContent" class="hidden">
+            <h2 style="font-family: 'Playfair Display'; margin-bottom: 20px;">Tus Cursos</h2>
+            
+            <!-- Curso 1 -->
+            <div id="curso1" class="course-card locked" onclick="playVideo('dQw4w9WgXcQ', 'curso1')">
+                <div>
+                    <h3>Fundamentos de Ritmo</h3>
+                    <p id="status1">Estado: Bloqueado (Requiere Pago)</p>
+                </div>
+                <div class="icon">🔒</div>
+            </div>
+
+            <!-- Curso 2 -->
+            <div id="curso2" class="course-card locked" onclick="playVideo('L_jWHffIx5E', 'curso2')">
+                <div>
+                    <h3>Técnica Avanzada</h3>
+                    <p id="status2">Estado: Bloqueado (Requiere Pago)</p>
+                </div>
+                <div class="icon">🔒</div>
+            </div>
+
+            <div id="adminArea" class="admin-panel">
+                <h3 style="color: var(--dorado)">Panel Administrador</h3>
+                <p style="font-size: 0.8rem;">Gestionando base de datos local...</p>
+                <button class="btn btn-gold" onclick="unlockAll()" style="font-size: 0.7rem; padding: 5px;">Simular: Habilitar todos los cursos</button>
+            </div>
+
+            <button class="btn btn-red" onclick="logout()" style="margin-top: 30px;">Cerrar Sesión</button>
+        </div>
+    </div>
+
+    <!-- Video Player Modal -->
+    <div id="videoModal" class="modal">
+        <span class="close-modal" onclick="closeVideo()">&times;</span>
+        <div class="modal-content" id="playerContainer">
+            <!-- Iframe de Youtube se inserta aquí -->
+        </div>
+    </div>
+
+    <script>
+        let currentUser = null;
+        let isRegistering = false;
+
+        function toggleAuth() {
+            isRegistering = !isRegistering;
+            document.getElementById('authTitle').innerText = isRegistering ? 'Crear Cuenta' : 'Iniciar Sesión';
+            document.getElementById('authBtn').innerText = isRegistering ? 'Registrarse' : 'Entrar';
+            document.getElementById('authSwitchText').innerHTML = isRegistering ? 
+                '¿Ya tienes cuenta? <a href="#" onclick="toggleAuth()" style="color: var(--dorado)">Inicia sesión</a>' : 
+                '¿No tienes cuenta? <a href="#" onclick="toggleAuth()" style="color: var(--dorado)">Regístrate</a>';
+        }
+
+        function handleAuth() {
+            const email = document.getElementById('email').value;
+            const pass = document.getElementById('password').value;
+
+            if(!email || !pass) return alert("Completa los datos");
+
+            if(isRegistering) {
+                const user = { email, pass, role: email === 'admin@jackson.com' ? 'admin' : 'student', courses: [] };
+                localStorage.setItem(email, JSON.stringify(user));
+                alert("Cuenta creada con éxito");
+                toggleAuth();
+            } else {
+                const savedUser = JSON.parse(localStorage.getItem(email));
+                if(savedUser && savedUser.pass === pass) {
+                    currentUser = savedUser;
+                    showApp();
+                } else {
+                    alert("Credenciales incorrectas");
+                }
+            }
+        }
+
+        function showApp() {
+            document.getElementById('authSection').classList.add('hidden');
+            document.getElementById('mainContent').classList.remove('hidden');
+            document.getElementById('userWelcome').innerText = `Hola, ${currentUser.email}`;
+
+            if(currentUser.role === 'admin') {
+                document.getElementById('adminArea').style.display = 'block';
+            }
+            updateCourseUI();
+        }
+
+        function updateCourseUI() {
+            currentUser.courses.forEach(cId => {
+                const card = document.getElementById(cId);
+                card.classList.remove('locked');
+                card.classList.add('unlocked');
+                card.querySelector('.icon').innerText = '▶️';
+                document.getElementById('status' + cId.slice(-1)).innerText = "Estado: Desbloqueado";
+            });
+        }
+
+        function unlockAll() {
+            currentUser.courses = ['curso1', 'curso2'];
+            localStorage.setItem(currentUser.email, JSON.stringify(currentUser));
+            updateCourseUI();
+            alert("Cursos habilitados para este usuario.");
+        }
+
+        function playVideo(id, cursoId) {
+            if(!currentUser.courses.includes(cursoId) && currentUser.role !== 'admin') {
+                return alert("Debes pagar este curso para verlo. Contacta a Jackson Bahía.");
+            }
+            const container = document.getElementById('playerContainer');
+            container.innerHTML = `<iframe width="100%" height="100%" src="https://www.youtube.com/embed/${id}?autoplay=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>`;
+            document.getElementById('videoModal').style.display = 'flex';
+        }
+
+        function closeVideo() {
+            document.getElementById('videoModal').style.display = 'none';
+            document.getElementById('playerContainer').innerHTML = '';
+        }
+
+        function logout() {
+            location.reload();
+        }
+    </script>
+</body>
+</html>
