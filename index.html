@@ -2,227 +2,149 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
-    <title>Jackson Bahía Cia | Academy</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Plus+Jakarta+Sans:wght@300;400;600&display=swap" rel="stylesheet"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Jackson Bahía Cia | Academia Elite</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Plus+Jakarta+Sans:wght@300;400;600;700&display=swap" rel="stylesheet"/>
     <style>
         :root {
             --rojo: #C8102E; --dorado: #D4AF37; --oscuro: #0a0a0a; --crema: #f8f1e7;
+            --glass: rgba(20, 20, 20, 0.95);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
-        
-        body { 
-            background-color: var(--oscuro); 
-            color: var(--crema); 
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow-x: hidden;
+        body { background-color: var(--oscuro); color: var(--crema); min-height: 100vh; }
+
+        .bg-dinamico {
+            position: fixed; inset: 0; z-index: -1;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.8), rgba(0,0,0,0.95)),
+                        url('https://images.unsplash.com/photo-1547153760-18fc86324498?auto=format&fit=crop&q=80&w=2000');
+            background-size: cover; background-position: center;
         }
 
-        /* CAPA DE FONDO: Z-INDEX BAJO */
-        .background-overlay {
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            background: 
-                linear-gradient(to bottom, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.9)),
-                url('https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?auto=format&fit=crop&q=80&w=2000');
-            background-size: cover;
-            background-position: center;
-            z-index: 1;
-        }
-
-        /* CONTENEDOR: Z-INDEX ALTO */
-        .container { 
-            width: 100%;
-            max-width: 400px; 
-            padding: 20px;
-            z-index: 100; /* Asegura que esté por encima del fondo */
-            position: relative;
-        }
-
+        .container { max-width: 700px; margin: 0 auto; padding: 40px 20px; position: relative; z-index: 10; }
         header { text-align: center; margin-bottom: 30px; }
-        h1 { font-family: 'Playfair Display'; font-size: 2.2rem; color: var(--dorado); margin-bottom: 5px; text-shadow: 0 2px 10px rgba(0,0,0,0.5); }
+        h1 { font-family: 'Playfair Display'; font-size: 2.5rem; color: var(--dorado); text-transform: uppercase; }
 
-        /* TARJETAS ESTILO CRISTAL */
-        .auth-card, .course-card {
-            background: rgba(20, 20, 20, 0.9);
-            backdrop-filter: blur(15px);
-            border: 1px solid rgba(255,255,255,0.1);
-            padding: 30px;
-            border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.6);
-            margin-bottom: 20px;
+        /* CARDS */
+        .card { background: var(--glass); padding: 25px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.1); margin-bottom: 20px; }
+        .categoria-title { border-left: 4px solid var(--dorado); padding-left: 15px; margin: 30px 0 15px; font-family: 'Playfair Display'; font-size: 1.4rem; }
+
+        .nivel-row {
+            display: flex; justify-content: space-between; align-items: center;
+            background: rgba(255,255,255,0.03); padding: 15px; border-radius: 12px; margin-bottom: 10px;
         }
 
-        input {
-            width: 100%; padding: 15px; margin-bottom: 15px; border-radius: 10px;
-            border: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.05); color: white;
-            font-size: 1rem; outline: none;
-        }
-
-        .btn {
-            width: 100%; padding: 15px; border-radius: 10px; border: none; font-weight: 700;
-            cursor: pointer; transition: 0.3s; text-transform: uppercase; letter-spacing: 1px;
-        }
+        .btn { padding: 12px 18px; border-radius: 8px; border: none; font-weight: 800; cursor: pointer; text-transform: uppercase; font-size: 0.7rem; }
         .btn-gold { background: var(--dorado); color: black; }
-        .btn-gold:hover { background: #fff; }
-        .btn-red { background: var(--rojo); color: white; margin-top: 20px; }
+        .btn-green { background: #2ecc71; color: white; }
+        .btn-red { background: var(--rojo); color: white; }
 
-        .course-card { padding: 20px; cursor: pointer; border-left: 4px solid #333; transition: 0.3s; }
-        .course-card:hover { transform: translateY(-5px); background: rgba(40,40,40,0.9); }
-        .course-card.unlocked { border-left-color: var(--dorado); }
-        .course-card h3 { font-size: 1.1rem; margin-bottom: 5px; }
-        .course-card p { font-size: 0.8rem; color: #888; }
+        /* PANEL ADMIN */
+        #adminPanel { background: #1a1a1a; border: 2px solid var(--dorado); padding: 20px; border-radius: 20px; margin-top: 30px; }
+        .user-row { border-bottom: 1px solid #333; padding: 10px 0; font-size: 0.8rem; }
+        .tag { padding: 2px 6px; border-radius: 4px; font-size: 0.6rem; margin-right: 5px; background: #444; }
 
-        /* MODAL VIDEO */
-        .modal {
-            position: fixed; inset: 0; background: rgba(0,0,0,0.98);
-            display: none; align-items: center; justify-content: center; z-index: 9999;
-        }
-        .modal-content { width: 95%; max-width: 800px; aspect-ratio: 16/9; position: relative; }
-        .close-btn { position: absolute; top: -45px; right: 0; color: white; font-size: 1.2rem; cursor: pointer; background: var(--rojo); padding: 5px 15px; border-radius: 5px; }
+        /* REPRODUCTOR */
+        .modal { position: fixed; inset: 0; background: rgba(0,0,0,0.98); display: none; align-items: center; justify-content: center; z-index: 10000; }
+        .modal-content { width: 95%; max-width: 900px; }
+        .v-cont { position: relative; padding-bottom: 56.25%; height: 0; background: #000; }
+        .v-cont iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
 
-        /* UTILIDADES */
         .hidden { display: none !important; }
-        #userWelcome { color: var(--dorado); font-weight: 600; font-size: 0.9rem; margin-bottom: 20px; display: block; text-align: center; }
-
+        input { width: 100%; padding: 15px; margin-bottom: 10px; border-radius: 10px; border: 1px solid #333; background: #000; color: white; }
     </style>
 </head>
 <body>
 
-    <div class="background-overlay"></div>
+    <div class="bg-dinamico"></div>
 
     <div class="container">
         <header>
             <h1>Jackson Bahía Cia</h1>
-            <p style="letter-spacing: 3px; font-size: 0.7rem; color: var(--dorado); opacity: 0.8;">ONLINE ACADEMY</p>
+            <p id="userNameDisplay" style="color: var(--dorado); font-weight: bold; font-size: 0.9rem;"></p>
         </header>
 
-        <!-- PANTALLA 1: LOGIN -->
-        <div id="authContainer">
-            <div class="auth-card">
-                <h2 id="authTitle" style="margin-bottom: 10px; font-family: 'Playfair Display';">Iniciar Sesión</h2>
-                <p id="authSwitch" style="font-size: 0.8rem; color: #888; margin-bottom: 20px;">
-                    ¿No tienes cuenta? <a href="javascript:void(0)" onclick="toggleAuth()" style="color: var(--dorado); text-decoration: none; font-weight: bold;">Regístrate</a>
-                </p>
-                <input type="email" id="email" placeholder="Correo electrónico">
-                <input type="password" id="password" placeholder="Contraseña">
-                <button class="btn btn-gold" onclick="handleAuth()">Ingresar</button>
-            </div>
+        <div id="loginBox" class="card" style="text-align: center;">
+            <h2 style="margin-bottom: 20px;">Acceso Academy</h2>
+            <input type="email" id="email" placeholder="Tu correo electrónico">
+            <input type="password" id="pass" placeholder="Tu contraseña">
+            <button class="btn btn-gold" style="width: 100%;" onclick="autenticar()">Entrar a Clases</button>
         </div>
 
-        <!-- PANTALLA 2: APP -->
-        <div id="appContainer" class="hidden">
-            <span id="userWelcome"></span>
+        <div id="appBox" class="hidden">
             
-            <div id="curso1" class="course-card" onclick="playVideo('dQw4w9WgXcQ', 'curso1')">
-                <h3>1. Fundamentos del Ritmo</h3>
-                <p id="st1">🔒 Contenido bloqueado</p>
+            <div class="card" style="background: linear-gradient(135deg, #600010, #000); border: 2px solid var(--dorado);">
+                <h2 style="color: var(--dorado)">👑 MEMBRESÍA VIP TOTAL</h2>
+                <p style="font-size: 0.8rem; margin: 10px 0;">Acceso a TODO por 30 días.</p>
+                <div style="font-size: 1.5rem; font-weight: bold;">$60.000</div>
+                <button id="btn-VIP" class="btn btn-gold" onclick="procesarInversion('VIP', 60000, 'LINK_VIP')">Invertir en todo</button>
             </div>
 
-            <div id="curso2" class="course-card" onclick="playVideo('L_jWHffIx5E', 'curso2')">
-                <h3>2. Estilo y Técnica Pro</h3>
-                <p id="st2">🔒 Contenido bloqueado</p>
+            <div class="categoria-title">Cursos Disponibles</div>
+            <div id="mainCatalog"></div>
+
+            <div id="adminArea" class="hidden">
+                <div id="adminPanel">
+                    <h3 style="color: var(--dorado); margin-bottom: 15px;">Panel de Control Jackson</h3>
+                    <div id="userList"></div>
+                </div>
             </div>
 
-            <div id="adminPanel" class="hidden" style="background: rgba(212, 175, 55, 0.1); padding: 15px; border-radius: 10px; border: 1px dashed var(--dorado); margin-bottom: 15px;">
-                <p style="font-size: 0.7rem; color: var(--dorado); margin-bottom: 10px; text-align: center;">MODO ADMINISTRADOR</p>
-                <button class="btn btn-gold" style="padding: 10px; font-size: 0.7rem;" onclick="adminUnlock()">Desbloquear Cursos (Simular Pago)</button>
-            </div>
-
-            <button class="btn btn-red" onclick="location.reload()">Cerrar Sesión</button>
+            <button class="btn btn-red" style="width: 100%; margin-top: 40px;" onclick="location.reload()">Cerrar Sesión</button>
         </div>
     </div>
 
-    <!-- REPRODUCTOR -->
-    <div id="videoModal" class="modal">
+    <div id="vModal" class="modal">
         <div class="modal-content">
-            <span class="close-btn" onclick="closeVideo()">CERRAR VIDEO</span>
-            <div id="ytPlayer" style="width: 100%; height: 100%;"></div>
+            <div class="v-cont" id="player"></div>
+            <button onclick="cerrarV()" class="btn btn-red" style="width: 100%; border-radius: 0;">CERRAR VIDEO</button>
         </div>
     </div>
 
     <script>
-        let sessionUser = null;
-        let mode = 'login';
+        let loggedUser = null;
+        const TIEMPO_ACCESO = 30 * 24 * 60 * 60 * 1000; // 30 días en milisegundos
 
-        function toggleAuth() {
-            mode = (mode === 'login') ? 'register' : 'login';
-            document.getElementById('authTitle').innerText = mode === 'login' ? 'Iniciar Sesión' : 'Crear Cuenta';
-            document.getElementById('authSwitch').innerHTML = mode === 'login' ? 
-                '¿No tienes cuenta? <a href="javascript:void(0)" onclick="toggleAuth()" style="color: var(--dorado)">Regístrate</a>' : 
-                '¿Ya tienes cuenta? <a href="javascript:void(0)" onclick="toggleAuth()" style="color: var(--dorado)">Inicia sesión</a>';
-        }
+        const catalog = [
+            {id: 'mus', cat: 'Musicalidad', n: 'Comprendiendo la Musicalidad', p: 20000, vid: 'ID_VIDEO', isPL: false, link: 'Uala_1'},
+            {id: 'b1', cat: 'Básicos', n: 'Básicos Nivel 1', p: 20000, vid: 'PL1', isPL: true, link: 'Uala_B1'},
+            {id: 'p1', cat: 'Pareja', n: 'Pareja Nivel 1', p: 25000, vid: 'PL_P1', isPL: true, link: 'Uala_P1'},
+            {id: 's1', cat: 'Shines', n: 'Shines Nivel 1', p: 20000, vid: 'PL_S1', isPL: true, link: 'Uala_S1'}
+        ];
 
-        function handleAuth() {
+        function autenticar() {
             const email = document.getElementById('email').value.toLowerCase().trim();
-            const pass = document.getElementById('password').value;
-
+            const pass = document.getElementById('pass').value;
             if(!email || !pass) return alert("Completa los datos");
 
-            if(mode === 'register') {
-                const newUser = { email, pass, role: (email === 'admin@jackson.com' ? 'admin' : 'student'), courses: [] };
-                localStorage.setItem(email, JSON.stringify(newUser));
-                alert("Registro exitoso. Ahora inicia sesión.");
-                toggleAuth();
-            } else {
-                const user = JSON.parse(localStorage.getItem(email) || '{}');
-                if(user.pass === pass) {
-                    sessionUser = user;
-                    startApp();
-                } else {
-                    alert("Correo o contraseña incorrectos");
+            let user = JSON.parse(localStorage.getItem(email));
+            
+            if(!user) {
+                user = { email, pass, role: email.includes('admin') ? 'admin' : 'user', access: {} };
+                localStorage.setItem(email, JSON.stringify(user));
+            }
+
+            if(user.pass !== pass) return alert("Contraseña incorrecta");
+            
+            loggedUser = user;
+            document.getElementById('loginBox').classList.add('hidden');
+            document.getElementById('appBox').classList.remove('hidden');
+            document.getElementById('userNameDisplay').innerText = "BIENVENIDO: " + email;
+            
+            if(user.role === 'admin') document.getElementById('adminArea').classList.remove('hidden');
+            
+            limpiarAccesosVencidos();
+            renderCatalog();
+            if(user.role === 'admin') renderAdmin();
+        }
+
+        function limpiarAccesosVencidos() {
+            const ahora = Date.now();
+            let cambio = false;
+            for(let id in loggedUser.access) {
+                if(ahora - loggedUser.access[id] > TIEMPO_ACCESO) {
+                    delete loggedUser.access[id];
+                    cambio = true;
                 }
             }
-        }
-
-        function startApp() {
-            document.getElementById('authContainer').classList.add('hidden');
-            document.getElementById('appContainer').classList.remove('hidden');
-            document.getElementById('userWelcome').innerText = "Bienvenido: " + sessionUser.email;
-
-            if(sessionUser.role === 'admin') {
-                document.getElementById('adminPanel').classList.remove('hidden');
-            }
-            refreshCursos();
-        }
-
-        function refreshCursos() {
-            const myCourses = sessionUser.courses || [];
-            myCourses.forEach(c => {
-                const el = document.getElementById(c);
-                if(el) {
-                    el.classList.add('unlocked');
-                    document.getElementById('st' + c.slice(-1)).innerText = "✅ Acceso Concedido - Ver ahora";
-                    document.getElementById('st' + c.slice(-1)).style.color = "var(--dorado)";
-                }
-            });
-        }
-
-        function adminUnlock() {
-            sessionUser.courses = ['curso1', 'curso2'];
-            localStorage.setItem(sessionUser.email, JSON.stringify(sessionUser));
-            refreshCursos();
-            alert("Cursos desbloqueados correctamente.");
-        }
-
-        function playVideo(code, id) {
-            if(!sessionUser.courses.includes(id) && sessionUser.role !== 'admin') {
-                return alert("Este curso requiere un pago previo.");
-            }
-            const container = document.getElementById('ytPlayer');
-            container.innerHTML = `<iframe width="100%" height="100%" src="https://www.youtube.com/embed/${code}?autoplay=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>`;
-            document.getElementById('videoModal').style.display = 'flex';
-        }
-
-        function closeVideo() {
-            document.getElementById('videoModal').style.display = 'none';
-            document.getElementById('ytPlayer').innerHTML = '';
-        }
-    </script>
-</body>
-</html>
+            if(
