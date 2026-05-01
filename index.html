@@ -95,4 +95,77 @@
         </div>
     </div>
 
-    <div id="vModal
+    <div id="vModal" class="modal">
+        <div class="modal-content">
+            <div class="v-cont" id="player"></div>
+            <button onclick="cerrarV()" class="btn btn-red" style="width:100%; border-radius:0; padding: 18px;">CERRAR CLASE</button>
+        </div>
+    </div>
+
+    <script>
+        // DATOS DE CURSOS Y PAGOS
+        const cursos = [
+            { id: 'mus', cat: 'TEORÍA Y MUSICALIDAD', n: 'Entendiendo la Musicalidad', v: 'Masterclass', p: '20.000', vid: 'dQw4w9WgXcQ', pl: false, link: 'https://link.uala.com.ar/mus' },
+            { id: 'b1', cat: 'BACHATA BÁSICOS (Individual)', n: 'Básicos Nivel 1', v: '10 Módulos', p: '20.000', vid: 'PLv8S_P4D8bV4sW9_T0D7S', pl: true, link: 'https://link.uala.com.ar/b1' },
+            // ... agregar todos los niveles detallados en el diseño
+            { id: 'p1', cat: 'BACHATA EN PAREJA', n: 'Nivel Pareja 1', v: '5 Clases Técnicas', p: '25.000', vid: 'ID_PLAYLIST_PAREJA_1', pl: true, link: 'https://link.uala.com.ar/p1' },
+            { id: 's1', cat: 'SHINES (Pasos Sueltos)', n: 'Shines Nivel 1', v: '5 Combinaciones', p: '20.000', vid: 'ID_PLAYLIST_SHINES_1', pl: true, link: 'https://link.uala.com.ar/s1' }
+        ];
+
+        // LÓGICA DE ALMACENAMIENTO DE COMPRAS (Simulada para testeo)
+        let misAccesos = JSON.parse(localStorage.getItem('jackson_compras')) || [];
+
+        function render() {
+            const cont = document.getElementById('app-catalog');
+            cont.innerHTML = '';
+            let currentCat = '';
+
+            cursos.forEach(c => {
+                if(c.cat !== currentCat) {
+                    cont.innerHTML += `<div class="categoria-header">${c.cat}</div>`;
+                    currentCat = c.cat;
+                }
+                const yaCompro = misAccesos.includes(c.id) || misAccesos.includes('VIP');
+                cont.innerHTML += `
+                    <div class="nivel-row">
+                        <div style="text-align: left;">
+                            <h3 style="font-size: 1rem;">${c.n}</h3>
+                            <p style="font-size: 0.8rem; color: #aaa;">${c.v}</p>
+                            <span style="font-size: 0.8rem; color: ${yaCompro ? '#2ecc71' : '#ccc'}">
+                                ${yaCompro ? 'ACTIVO' : '$' + c.p}
+                            </span>
+                        </div>
+                        <button class="btn ${yaCompro ? 'btn-red' : 'btn-gold'}" 
+                                onclick="${yaCompro ? `ver('${c.vid}', ${c.pl})` : `abrirPago('${c.id}', '${c.link}')`}">
+                            ${yaCompro ? 'VER' : 'PAY NOW'}
+                        </button>
+                    </div>`;
+            });
+        }
+
+        // Lógica de Pago
+        function abrirPago(id, link) {
+            // En producción, esto simplemente abre la pasarela de pago.
+            // Aquí simulamos que se abre y que el usuario "compra".
+            if(confirm("Se abrirá Ualá para pagar. ¿Deseas simular que compras este curso?")) {
+                window.open(link, '_blank');
+                // Simulación: Guardamos la compra en local storage.
+                misAccesos.push(id);
+                localStorage.setItem('jackson_compras', JSON.stringify(misAccesos));
+                render();
+            }
+        }
+
+        // Lógica de Reproductor de Video
+        function ver(id, esLista) {
+            const url = esLista ? `https://www.youtube.com/embed?listType=playlist&list=${id}&autoplay=1` : `https://www.youtube.com/embed/${id}?autoplay=1`;
+            document.getElementById('player').innerHTML = `<iframe src="${url}" allowfullscreen allow="autoplay"></iframe>`;
+            document.getElementById('vModal').style.display = 'flex';
+        }
+
+        function cerrarV() { document.getElementById('vModal').style.display = 'none'; document.getElementById('player').innerHTML = ''; }
+
+        render();
+    </script>
+</body>
+</html>
