@@ -3,116 +3,243 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jackson Bahía Cia | Academia Elite</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
+    <title>Jackson Bahía Cia | Academia de Bachata Online</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
+    
     <style>
-        :root { --dorado: #D4AF37; --rojo: #C8102E; --oscuro: #050505; --glass: rgba(255, 255, 255, 0.07); }
+        :root {
+            --dorado: #D4AF37;
+            --dorado-bright: #f1d56e;
+            --rojo: #C8102E;
+            --oscuro: #050505;
+            --glass: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --exito: #2ecc71;
+        }
+
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { background-color: var(--oscuro); color: white; font-family: 'Plus Jakarta Sans', sans-serif; overflow-x: hidden; }
         
-        #particles-js { position: fixed; width: 100%; height: 100%; z-index: -1; background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.9)), url('jack.jpeg'); background-size: cover; background-position: center top; }
+        body {
+            background-color: var(--oscuro);
+            color: white;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
 
-        .container { max-width: 1000px; margin: 0 auto; padding: 100px 20px; text-align: center; }
+        /* --- FONDO DINÁMICO --- */
+        #particles-js {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.9)), url('jack.jpeg');
+            background-size: cover;
+            background-position: center top;
+            background-attachment: fixed;
+        }
+
+        /* --- NAVIGATION --- */
+        nav {
+            position: fixed;
+            top: 0; width: 100%;
+            padding: 20px 5%;
+            display: flex; justify-content: space-between; align-items: center;
+            background: rgba(0,0,0,0.8);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .nav-logo { font-family: 'Playfair Display'; color: var(--dorado); font-size: 1.5rem; }
+        .nav-auth button {
+            background: none; border: 1px solid var(--dorado); color: white;
+            padding: 8px 20px; border-radius: 50px; cursor: pointer; transition: 0.3s;
+        }
+        .nav-auth button:hover { background: var(--dorado); color: black; }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            height: 100vh;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            text-align: center; padding: 0 20px;
+        }
+
+        .hero-logo {
+            width: 180px; height: 180px;
+            border-radius: 50%;
+            margin-bottom: 20px;
+            box-shadow: 0 0 50px rgba(212, 175, 55, 0.4);
+            border: 2px solid var(--dorado);
+            animation: pulse 4s infinite;
+        }
+
+        h1 {
+            font-family: 'Playfair Display';
+            font-size: clamp(3rem, 8vw, 5rem);
+            text-transform: uppercase;
+            line-height: 1;
+            margin-bottom: 10px;
+            background: linear-gradient(to bottom, #fff, var(--dorado));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 0 15px rgba(212,175,55,0.5));
+        }
+
+        .subtitle {
+            font-size: 1.2rem; letter-spacing: 8px; color: var(--dorado);
+            font-weight: 800; margin-bottom: 30px;
+        }
+
+        /* --- GRID DE CURSOS --- */
+        .container { max-width: 1200px; margin: 0 auto; padding: 100px 20px; }
         
-        .hero-logo { width: 150px; border-radius: 50%; border: 2px solid var(--dorado); box-shadow: 0 0 30px rgba(212,175,55,0.4); margin-bottom: 20px; }
-        h1 { font-family: 'Playfair Display'; font-size: 3.5rem; text-transform: uppercase; color: var(--dorado); margin-bottom: 5px; }
-        .subtitle { letter-spacing: 5px; font-weight: 800; font-size: 0.9rem; margin-bottom: 50px; opacity: 0.8; }
+        .section-title {
+            font-family: 'Playfair Display';
+            font-size: 2.5rem; margin-bottom: 50px;
+            border-left: 5px solid var(--dorado); padding-left: 20px;
+        }
 
-        .course-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; }
-        .card { background: var(--glass); backdrop-filter: blur(15px); padding: 30px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.1); text-align: left; }
-        .card h3 { color: var(--dorado); margin-bottom: 20px; border-bottom: 1px solid var(--dorado); padding-bottom: 10px; }
+        .course-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
 
-        .level-row { display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.05); }
+        .course-card {
+            background: var(--glass);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 30px;
+            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .course-card h3 { color: var(--dorado); margin-bottom: 15px; font-size: 1.4rem; }
         
-        .btn-pay { background: var(--dorado); color: black; border: none; padding: 10px 18px; border-radius: 10px; font-weight: 800; cursor: pointer; text-transform: uppercase; font-size: 0.7rem; transition: 0.3s; }
+        .level-item {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 15px 0; border-bottom: 1px solid var(--glass-border);
+        }
+
+        .btn-pay {
+            background: var(--dorado); color: black; border: none;
+            padding: 10px 20px; border-radius: 10px; font-weight: 800;
+            cursor: pointer; text-transform: uppercase; transition: 0.3s; font-size: 0.7rem;
+        }
+
         .btn-pay:hover { background: white; transform: scale(1.05); }
-        .btn-active { background: #2ecc71; color: white; }
+        
+        /* Estados de botón */
+        .btn-view { background: var(--exito); color: white; }
         .btn-expired { background: var(--rojo); color: white; }
 
-        .days-left { display: block; font-size: 0.6rem; margin-top: 4px; color: #2ecc71; text-align: center; }
+        .time-badge {
+            display: block; font-size: 0.65rem; color: var(--exito); margin-top: 4px;
+        }
 
-        /* MODAL VIDEO */
-        .modal { position: fixed; inset: 0; background: rgba(0,0,0,0.95); display: none; justify-content: center; align-items: center; z-index: 2000; }
-        .modal-content { width: 90%; max-width: 800px; aspect-ratio: 16/9; position: relative; }
-        .close-modal { position: absolute; top: -40px; right: 0; color: white; cursor: pointer; font-weight: bold; }
+        /* --- MODAL --- */
+        .modal {
+            position: fixed; inset: 0; background: rgba(0,0,0,0.9);
+            display: none; justify-content: center; align-items: center; z-index: 2000;
+        }
+        .modal-content {
+            background: #111; padding: 40px; border-radius: 20px;
+            max-width: 450px; width: 90%; text-align: center; border: 1px solid var(--dorado);
+        }
 
-        footer { margin-top: 100px; padding: 50px; border-top: 1px solid rgba(255,255,255,0.1); }
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); box-shadow: 0 0 30px rgba(212, 175, 55, 0.3); }
+            50% { transform: scale(1.05); box-shadow: 0 0 60px rgba(212, 175, 55, 0.6); }
+        }
+
+        footer { padding: 60px 5%; text-align: center; border-top: 1px solid var(--glass-border); }
     </style>
 </head>
 <body>
 
     <div id="particles-js"></div>
 
-    <div class="container">
-        <img src="LOGO Jackson Bahia oficial.jpg" class="hero-logo">
+    <nav>
+        <div class="nav-logo">JACKSON BAHÍA</div>
+        <div class="nav-auth" id="userArea">
+            <button onclick="toggleLogin()">Ingresar / Registrarse</button>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <img src="LOGO Jackson Bahia oficial.jpg" class="hero-logo" alt="Logo">
         <h1>Jackson Bahía Cia</h1>
         <p class="subtitle">CLASES DE BACHATA ONLINE</p>
+        <button class="btn-pay" style="padding: 15px 40px;" onclick="document.getElementById('cursos').scrollIntoView()">Ver mis Clases</button>
+    </section>
 
-        <div class="course-grid">
-            <div class="card">
-                <h3>Bachata Básicos</h3>
-                <div class="level-row">
-                    <div>
-                        <span>Nivel 1</span>
-                        <div id="status-b1"></div>
-                    </div>
-                    <div id="action-b1">
-                        <button class="btn-pay" onclick="procesarPago('b1', 'https://youtu.be/8Ne_yfRQfEA')">Pagar</button>
-                    </div>
-                </div>
-                </div>
-        </div>
+    <div class="container" id="cursos">
+        <h2 class="section-title">Nuestra Academia</h2>
+        <div class="course-grid" id="courseContainer"></div>
     </div>
 
-    <div id="videoModal" class="modal">
+    <div class="modal" id="modal">
         <div class="modal-content">
-            <span class="close-modal" onclick="cerrarVideo()">CERRAR [X]</span>
-            <div id="player" style="width:100%; height:100%;"></div>
+            <i data-lucide="credit-card" style="color: var(--dorado); width: 50px; height: 50px; margin-bottom: 15px;"></i>
+            <h2 id="modalTitle">Confirmar Acceso</h2>
+            <p id="modalText" style="margin: 20px 0; color: #aaa;">El acceso a este nivel tendrá una duración de 30 días corridos.</p>
+            <div id="modalActions">
+                 <button class="btn-pay" onclick="confirmarCompra()">Confirmar Pago ($)</button>
+                 <button onclick="cerrarModal()" style="background:none; border:none; color:white; margin-left:15px; cursor:pointer;">Cancelar</button>
+            </div>
         </div>
     </div>
+
+    <footer>
+        <p>© 2026 Jackson Bahía Cia - Todos los derechos reservados</p>
+    </footer>
 
     <script>
-        // 1. Lógica de Control de Tiempo (30 días = 2592000000 milisegundos)
-        const DURACION_ACCESO = 30 * 24 * 60 * 60 * 1000; 
+        const DURACION_ACCESO = 30 * 24 * 60 * 60 * 1000; // 30 días en ms
+        
+        const cursosData = [
+            { id: 'b', cat: 'Bachata Básicos', niveles: [1, 2, 3, 4], link: 'https://youtu.be/8Ne_yfRQfEA' },
+            { id: 'p', cat: 'Bachata en Pareja', niveles: [1, 2, 3, 4], link: '#' },
+            { id: 's', cat: 'Shines (Pasos Sueltos)', niveles: [1, 2, 3, 4], link: '#' },
+            { id: 'm', cat: 'Comprensión Musical', niveles: ['Único'], link: '#' }
+        ];
 
-        function procesarPago(id, link) {
-            // Simulación de pago exitoso
-            const ahora = new Date().getTime();
-            const compra = {
-                fechaCompra: ahora,
-                videoUrl: link
-            };
-            localStorage.setItem('compra_' + id, JSON.stringify(compra));
-            alert("¡Pago exitoso! Tienes 30 días de acceso a partir de ahora.");
-            verificarAccesos();
-        }
+        let userState = JSON.parse(localStorage.getItem('jb_user')) || { logged: false, courses: {} };
+        let selectedProduct = null;
 
-        function verificarAccesos() {
-            const id = 'b1'; // Ejemplo para Nivel 1
-            const data = localStorage.getItem('compra_' + id);
-            const statusDiv = document.getElementById('status-' + id);
-            const actionDiv = document.getElementById('action-' + id);
+        function renderCursos() {
+            const container = document.getElementById('courseContainer');
+            const ahora = Date.now();
 
-            if (data) {
-                const compra = JSON.parse(data);
-                const ahora = new Date().getTime();
-                const transcurrido = ahora - compra.fechaCompra;
+            container.innerHTML = cursosData.map(curso => `
+                <div class="course-card">
+                    <h3>${curso.cat}</h3>
+                    <div class="level-list">
+                        ${curso.niveles.map(lvl => {
+                            const prodId = `${curso.id}-${lvl}`;
+                            const dataCompra = userState.courses[prodId];
+                            
+                            let btnHtml = '';
+                            if (dataCompra) {
+                                const tiempoTranscurrido = ahora - dataCompra.fecha;
+                                if (tiempoTranscurrido < DURACION_ACCESO) {
+                                    const diasFaltan = Math.ceil((DURACION_ACCESO - tiempoTranscurrido) / (1000 * 60 * 60 * 24));
+                                    btnHtml = `
+                                        <div>
+                                            <button class="btn-pay btn-view" onclick="window.open('${curso.link}', '_blank')">VER VIDEO</button>
+                                            <span class="time-badge">Faltan ${diasFaltan} días</span>
+                                        </div>`;
+                                } else {
+                                    btnHtml = `<button class="btn-pay btn-expired" onclick="intentarCompra('${prodId}')">EXPIRADO - PAGAR</button>`;
+                                }
+                            } else {
+                                btnHtml = `<button class="btn-pay" onclick="intentarCompra('${prodId}')">PAGAR</button>`;
+                            }
 
-                if (transcurrido < DURACION_ACCESO) {
-                    // ACCESO ACTIVO
-                    const diasRestantes = Math.ceil((DURACION_ACCESO - transcurrido) / (1000 * 60 * 60 * 24));
-                    statusDiv.innerHTML = `<span class="days-left">Quedan ${diasRestantes} días</span>`;
-                    actionDiv.innerHTML = `<button class="btn-pay btn-active" onclick="verVideo('${compra.videoUrl}')">VER CLASE</button>`;
-                } else {
-                    // ACCESO CADUCADO
-                    statusDiv.innerHTML = `<span class="days-left" style="color:red">Acceso Caducado</span>`;
-                    actionDiv.innerHTML = `<button class="btn-pay btn-expired" onclick="procesarPago('${id}', '${compra.videoUrl}')">RENOVAR</button>`;
-                }
-            }
-        }
-
-        function verVideo(url) {
-            const videoId = url.split('v=')[1];
-            document.getElementById('player').innerHTML = `<iframe width="10
+                            return `
+                                <div class="level-item">
+                                
