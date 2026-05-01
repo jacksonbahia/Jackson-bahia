@@ -3,286 +3,125 @@
 <head>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Jackson Bahía Cia | Academia Elite</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Plus+Jakarta+Sans:wght@300;400;600;700&display=swap" rel="stylesheet"/>
+    <title>Jackson Bahía Cia | Academia de Bachata</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Plus+Jakarta+Sans:wght@400;700&display=swap" rel="stylesheet"/>
     <style>
-        :root {
-            --rojo: #C8102E; --dorado: #D4AF37; --oscuro: #0a0a0a; --crema: #f8f1e7;
-            --glass: rgba(15, 15, 15, 0.96); /* Un fondo oscuro casi sólido para el panel central */
-        }
-
+        :root { --dorado: #D4AF37; --oscuro: #0a0a0a; --rojo: #C8102E; }
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
         
         body { 
-            background-color: var(--oscuro); 
-            color: var(--crema); 
+            background: var(--oscuro); 
+            color: white; 
             min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow-x: hidden;
-            position: relative; /* Importante para el posicionamiento del pseudo-elemento de fondo */
+            display: flex; justify-content: center; align-items: center;
         }
 
-        /* FONDO DINÁMICO MEJORADO Y FIJO */
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            background-image: url('jack_bg.jpg'); /* ESTE ES TU ARCHIVO DE FONDO */
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            z-index: -2; /* Detrás de todo */
+        /* FONDO PRINCIPAL (Tu foto del saco rojo) */
+        .bg-main {
+            position: fixed; inset: 0;
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.8)), url('jack.jpeg');
+            background-size: cover; background-position: center;
+            z-index: -1;
         }
 
-        /* Superposición traslúcida oscura para mejorar la legibilidad */
-        body::after {
-            content: '';
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            background: linear-gradient(135deg, rgba(0,0,0,0.85) 0%, rgba(10,10,10,0.95) 100%);
-            z-index: -1; /* Encima de la imagen, debajo del contenido */
-        }
+        .container { width: 100%; max-width: 900px; padding: 20px; text-align: center; }
 
-        .container { 
-            width: 100%;
-            max-width: 480px; /* Ancho elegante y contenido */
-            padding: 20px;
-            z-index: 100;
-            position: relative;
-        }
+        /* LOGO */
+        .logo-img { width: 120px; margin-bottom: 10px; filter: drop-shadow(0 0 15px rgba(212,175,55,0.5)); }
 
-        header { text-align: center; margin-bottom: 30px; }
-        h1 { font-family: 'Playfair Display'; font-size: 2.2rem; color: var(--dorado); margin-bottom: 5px; text-shadow: 0 2px 10px rgba(0,0,0,0.5); }
+        nav { margin-bottom: 30px; }
+        nav a { color: white; text-decoration: none; margin: 0 15px; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px; opacity: 0.8; transition: 0.3s; }
+        nav a:hover { color: var(--dorado); opacity: 1; }
 
-        /* PANEL CENTRAL CON DISEÑO DE CRISTAL (GLASSMORPHISM) */
-        .auth-card, .course-card {
-            background: rgba(30, 30, 30, 0.8); /* Un gris oscuro traslúcido */
+        h1 { font-family: 'Playfair Display'; font-size: 2.5rem; text-transform: uppercase; margin-bottom: 40px; }
+        h1 span { color: var(--dorado); }
+
+        /* PANEL CENTRAL (Glassmorphism) */
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.05);
             backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px); /* Soporte para Safari */
-            border: 1px solid rgba(255,255,255,0.08);
-            padding: 30px;
-            border-radius: 25px; /* Bordes más redondeados */
-            box-shadow: 0 15px 35px rgba(0,0,0,0.6);
-            margin-bottom: 20px;
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 30px;
+            padding: 40px;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.5);
         }
 
-        input {
-            width: 100%; padding: 15px; margin-bottom: 15px; border-radius: 12px;
-            border: 1px solid rgba(255,255,255,0.1); background: rgba(0,0,0,0.3); color: white;
-            font-size: 1rem; outline: none;
+        .promo-banner {
+            background: linear-gradient(90deg, #b8860b, #ffd700);
+            color: black; padding: 10px 30px; border-radius: 50px;
+            display: inline-block; font-weight: 800; font-size: 0.9rem;
+            margin-bottom: 30px; cursor: pointer; border: none;
         }
 
-        .btn {
-            width: 100%; padding: 15px; border-radius: 12px; border: none; font-weight: 700;
-            cursor: pointer; transition: 0.3s; text-transform: uppercase; letter-spacing: 1px;
+        /* GRILLA DE CLASES (Igual a tu imagen) */
+        .grid-clases {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px; margin-bottom: 40px;
         }
-        .btn-gold { background: var(--dorado); color: black; box-shadow: 0 0 10px rgba(212, 175, 55, 0.4); }
-        .btn-gold:hover { background: #fff; box-shadow: 0 0 20px rgba(255, 255, 255, 0.6); }
-        .btn-red { background: var(--rojo); color: white; margin-top: 20px; }
 
-        .course-card { padding: 20px; cursor: pointer; border-left: 4px solid #333; transition: 0.3s; }
-        .course-card:hover { transform: translateY(-5px); background: rgba(40,40,40,0.9); }
-        .course-card.unlocked { border-left-color: var(--dorado); }
-        .course-card h3 { font-size: 1.1rem; margin-bottom: 5px; color: var(--dorado); }
-        .course-card p { font-size: 0.8rem; color: #bbb; }
+        .clase-item {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.1);
+            padding: 25px 15px; border-radius: 20px;
+            cursor: pointer; transition: 0.3s;
+        }
+        .clase-item:hover { background: rgba(255,255,255,0.1); border-color: var(--dorado); transform: translateY(-5px); }
+        .clase-item h3 { font-size: 1rem; margin-bottom: 15px; color: var(--dorado); }
+        .play-icon { width: 40px; height: 40px; background: rgba(212,175,55,0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto; color: var(--dorado); }
+
+        /* FEATURED CLASES (Fotos grupales) */
+        .featured-header { text-align: left; margin-bottom: 15px; font-size: 1.2rem; font-family: 'Playfair Display'; }
+        .featured-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+        .featured-thumb { 
+            height: 150px; border-radius: 15px; overflow: hidden; position: relative; 
+            border: 1px solid rgba(255,255,255,0.1); cursor: pointer;
+        }
+        .featured-thumb img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; }
+        .featured-thumb:hover img { transform: scale(1.1); }
+        .thumb-play { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,0.3); }
 
         /* MODAL VIDEO */
-        .modal {
-            position: fixed; inset: 0; background: rgba(0,0,0,0.98);
-            display: none; align-items: center; justify-content: center; z-index: 9999;
+        .modal { position: fixed; inset: 0; background: rgba(0,0,0,0.95); display: none; align-items: center; justify-content: center; z-index: 1000; }
+        .modal-content { width: 90%; max-width: 800px; aspect-ratio: 16/9; position: relative; }
+        .close { position: absolute; top: -40px; right: 0; color: white; cursor: pointer; font-weight: bold; }
+
+        @media (max-width: 600px) {
+            .grid-clases { grid-template-columns: 1fr 1fr; }
+            .featured-grid { grid-template-columns: 1fr; }
         }
-        .modal-content { width: 95%; max-width: 800px; aspect-ratio: 16/9; position: relative; border-radius: 15px; overflow: hidden; border: 1px solid var(--dorado); }
-        .close-btn { position: absolute; top: -45px; right: 0; color: white; font-size: 1.2rem; cursor: pointer; background: var(--rojo); padding: 5px 15px; border-radius: 5px; }
-
-        /* UTILIDADES */
-        .hidden { display: none !important; }
-        #userWelcome { color: var(--dorado); font-weight: 600; font-size: 0.9rem; margin-bottom: 20px; display: block; text-align: center; }
-
     </style>
 </head>
 <body>
 
+    <div class="bg-main"></div>
+
     <div class="container">
-        <header>
-            <h1>Jackson Bahía Cia</h1>
-            <p style="letter-spacing: 3px; font-size: 0.7rem; color: var(--crema); opacity: 0.8; margin-top: 5px;">ONLINE ACADEMY</p>
-        </header>
-
-        <div id="authContainer">
-            <div class="auth-card">
-                <h2 id="authTitle" style="margin-bottom: 10px; font-family: 'Playfair Display'; text-align: center;">Iniciar Sesión</h2>
-                <p id="authSwitch" style="font-size: 0.8rem; color: #888; margin-bottom: 20px; text-align: center;">
-                    ¿No tienes cuenta? <a href="javascript:void(0)" onclick="toggleAuth()" style="color: var(--dorado); text-decoration: none; font-weight: bold;">Regístrate</a>
-                </p>
-                <input type="email" id="email" placeholder="Correo electrónico">
-                <input type="password" id="password" placeholder="Contraseña">
-                <button class="btn btn-gold" onclick="handleAuth()">Ingresar</button>
-                <p style="font-size: 0.7rem; color: #777; margin-top: 15px; text-align: center;">Acceso Alumnos y Administrador (admin@jackson.com)</p>
-            </div>
-        </div>
-
-        <div id="appContainer" class="hidden">
-            <span id="userWelcome"></span>
-            
-            <div class="categoria-header" style="background: rgba(212, 175, 55, 0.15); padding: 10px; border-radius: 8px; border-left: 3px solid var(--dorado); margin-bottom: 15px;">
-                <p style="font-size: 0.7rem; color: var(--dorado); font-weight: bold;">MIS CURSOS ADQUIRIDOS (30 DÍAS)</p>
-            </div>
-
-            <div id="item-musicalidad" class="course-card" onclick="verVideo('dQw4w9WgXcQ', 'musicalidad')">
-                <h3>1. Masterclass Musicalidad</h3>
-                <p id="st-musicalidad">🔒 Requiere pago</p>
-            </div>
-
-            <div id="item-basicos1" class="course-card" onclick="verVideo('ID_PLAYLIST', 'basicos1')">
-                <h3>2. Básicos Nivel 1</h3>
-                <p id="st-basicos1">🔒 Requiere pago</p>
-            </div>
-
-            <div id="item-pareja1" class="course-card" onclick="verVideo('ID_PLAYLIST', 'pareja1')">
-                <h3>3. Bachata Pareja - Nivel 1</h3>
-                <p id="st-pareja1">🔒 Requiere pago</p>
-            </div>
-
-            <div id="adminPanel" class="hidden" style="background: rgba(212, 175, 55, 0.08); padding: 20px; border-radius: 15px; border: 1px dashed var(--dorado); margin: 20px 0;">
-                <h3 style="color: var(--dorado); font-size: 0.9rem; margin-bottom: 15px; text-align: center;">PANEL DE CONTROL (ADMIN)</h3>
-                <div id="userList" style="max-height: 200px; overflow-y: auto; font-size: 0.8rem; color: #ccc;">
-                    </div>
-                <button class="btn btn-gold" style="padding: 10px; font-size: 0.7rem; margin-top: 15px;" onclick="activarPaseVIPManual()">ACTIVAR PASE VIP MANUAL (Admin)</button>
-            </div>
-
-            <div class="footer-links" style="margin-top: 30px; text-align: center;">
-                <p style="font-size: 0.7rem; color: #999; margin-bottom: 10px;">Contactos Oficiales</p>
-                <div style="display: flex; justify-content: center; gap: 10px;">
-                    <a href="https://wa.me/542914220136" target="_blank" style="color: var(--dorado); font-weight: bold; text-decoration: none;">WhatsApp</a>
-                    <a href="https://instagram.com/TU_PERFIL_INSTAGRAM" target="_blank" style="color: var(--dorado); font-weight: bold; text-decoration: none;">Instagram</a>
-                </div>
-            </div>
-
-            <button class="btn btn-red" onclick="location.reload()">Cerrar Sesión</button>
-        </div>
-    </div>
-
-    <div id="videoModal" class="modal">
-        <div class="modal-content">
-            <span class="close-btn" onclick="closeVideo()">CERRAR VIDEO</span>
-            <div id="ytPlayer" style="width: 100%; height: 100%;"></div>
-        </div>
-    </div>
-
-    <script>
-        // Lógica de autenticación y gestión de cursos idéntica a las versiones anteriores,
-        // asegurando la funcionalidad de 30 días, panel admin y protección de videos.
+        <img src="logo.jpg" class="logo-img" alt="Jackson Bahia Logo">
         
-        let sessionUser = null;
-        let mode = 'login';
-        const TIEMPO_ACCESO = 30 * 24 * 60 * 60 * 1000; // 30 días en milisegundos
+        <nav>
+            <a href="#">Inicio</a>
+            <a href="#">Sobre Nosotros</a>
+            <a href="#">Clases</a>
+            <a href="#">Eventos</a>
+            <a href="#">Contacto</a>
+        </nav>
 
-        function toggleAuth() {
-            mode = (mode === 'login') ? 'register' : 'login';
-            document.getElementById('authTitle').innerText = mode === 'login' ? 'Iniciar Sesión' : 'Crear Cuenta';
-            document.getElementById('authSwitch').innerHTML = mode === 'login' ? 
-                '¿No tienes cuenta? <a href="javascript:void(0)" onclick="toggleAuth()" style="color: var(--dorado)">Regístrate</a>' : 
-                '¿Ya tienes cuenta? <a href="javascript:void(0)" onclick="toggleAuth()" style="color: var(--dorado)">Inicia sesión</a>';
-        }
+        <h1>Bienvenidos a la academia de bachata de <span>Jackson Bahía</span></h1>
 
-        function handleAuth() {
-            const email = document.getElementById('email').value.toLowerCase().trim();
-            const pass = document.getElementById('password').value;
+        <div class="glass-panel">
+            <button class="promo-banner" onclick="abrirPago()">INSCRÍBETE AHORA - PASE VIP DE 30 DÍAS</button>
 
-            if(!email || !pass) return alert("Completa los datos");
-
-            if(mode === 'register') {
-                if(localStorage.getItem(email)) return alert("Este correo ya está registrado");
-                const newUser = { email, pass, role: (email === 'admin@jackson.com' ? 'admin' : 'student'), access: {} };
-                localStorage.setItem(email, JSON.stringify(newUser));
-                alert("Cuenta registrada. ¡Ahora inicia sesión!");
-                toggleAuth();
-            } else {
-                const user = JSON.parse(localStorage.getItem(email) || '{}');
-                if(user.pass === pass) {
-                    sessionUser = user;
-                    startApp();
-                } else {
-                    alert("Datos incorrectos");
-                }
-            }
-        }
-
-        function startApp() {
-            document.getElementById('authContainer').classList.add('hidden');
-            document.getElementById('appContainer').classList.remove('hidden');
-            document.getElementById('userWelcome').innerText = "Alumno: " + sessionUser.email;
-
-            if(sessionUser.role === 'admin') {
-                document.getElementById('adminPanel').classList.remove('hidden');
-                refreshUserList();
-            }
-            refreshCatalog();
-        }
-
-        function refreshCatalog() {
-            const now = Date.now();
-            const myAccess = sessionUser.access || {};
-            const courses = [
-                {id: 'musicalidad', item: 'item-musicalidad', status: 'st-musicalidad'},
-                {id: 'basicos1', item: 'item-basicos1', status: 'st-basicos1'},
-                {id: 'pareja1', item: 'item-pareja1', status: 'st-pareja1'}
-            ];
-
-            courses.forEach(c => {
-                const elItem = document.getElementById(c.item);
-                const elStatus = document.getElementById(c.status);
-                const fechaPago = myAccess[c.id];
-                const activo = fechaPago && (now - fechaPago < TIEMPO_ACCESO);
-
-                if(activo || sessionUser.role === 'admin') {
-                    elItem.classList.add('unlocked');
-                    const diasRestantes = activo ? Math.ceil((TIEMPO_ACCESO - (now - fechaPago)) / (1000 * 60 * 60 * 24)) : 'Manual';
-                    elStatus.innerText = "✅ Disponible para ver (" + diasRestantes + " días)";
-                    elStatus.style.color = "var(--dorado)";
-                } else {
-                    elItem.classList.remove('unlocked');
-                    elStatus.innerText = "🔒 Requiere pago";
-                    elStatus.style.color = "#ccc";
-                }
-            });
-        }
-
-        function refreshUserList() {
-            const list = document.getElementById('userList');
-            list.innerHTML = '';
-            for (let i = 0; i < localStorage.length; i++){
-                let key = localStorage.key(i);
-                if (key.includes('@') && key !== 'admin@jackson.com') {
-                    list.innerHTML += '<div>' + key + '</div>';
-                }
-            }
-        }
-
-        function activarPaseVIPManual() {
-            sessionUser.access = { musicalidad: Date.now(), basicos1: Date.now(), pareja1: Date.now() };
-            localStorage.setItem(sessionUser.email, JSON.stringify(sessionUser));
-            refreshCatalog();
-            alert("Pase VIP de 30 días activado manualmente.");
-        }
-
-        function verVideo(id, cursoId) {
-            if(!sessionUser.access[cursoId] && sessionUser.role !== 'admin') {
-                return alert("Para ver este video, primero debes realizar el pago correspondiente.");
-            }
-            const container = document.getElementById('ytPlayer');
-            container.innerHTML = `<iframe src="https://www.youtube.com/embed/${id}?autoplay=1&rel=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>`;
-            document.getElementById('videoModal').style.display = 'flex';
-        }
-
-        function closeVideo() {
-            document.getElementById('videoModal').style.display = 'none';
-            document.getElementById('ytPlayer').innerHTML = '';
-        }
-    </script>
-</body>
-</html>
+            <div class="grid-clases">
+                <div class="clase-item" onclick="ver('ID_MUSICALIDAD')">
+                    <h3>Musicalidad</h3>
+                    <div class="play-icon">▶</div>
+                </div>
+                <div class="clase-item" onclick="ver('ID_BASICOS')">
+                    <h3>Básicos Nivel 1</h3>
+                    <div class="play-icon">▶</div>
+                </div>
+                <div class="clase-item" onclick="ver('ID_PAREJA')">
+                    <h3>Pareja Nivel 1</h3>
+                    <div class="play-icon">▶</div>
+                </div>
