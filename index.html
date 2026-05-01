@@ -8,72 +8,56 @@
     <style>
         :root { --rojo: #C8102E; --dorado: #D4AF37; --oscuro: #0a0a0a; --crema: #f8f1e7; }
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
-        
         body { background-color: var(--oscuro); color: var(--crema); line-height: 1.6; overflow-x: hidden; }
 
-        /* FONDO TRASLÚCIDO MEJORADO */
         .bg-dinamico {
             position: fixed; inset: 0; z-index: -1;
-            background: linear-gradient(rgba(10, 10, 10, 0.6), rgba(10, 10, 10, 0.9)),
+            background: linear-gradient(rgba(10, 10, 10, 0.5), rgba(10, 10, 10, 0.9)),
                         url('jack.jpeg'); 
-            background-size: cover; 
-            background-position: center top;
-            background-attachment: fixed;
+            background-size: cover; background-position: center top; background-attachment: fixed;
         }
 
         .container { max-width: 650px; margin: 0 auto; padding: 40px 20px; position: relative; z-index: 10; }
-        
         header { text-align: center; margin-bottom: 40px; }
-        h1 { font-family: 'Playfair Display'; font-size: 2.8rem; color: var(--dorado); text-transform: uppercase; letter-spacing: 2px; text-shadow: 3px 3px 15px rgba(0,0,0,0.8); }
+        h1 { font-family: 'Playfair Display'; font-size: 2.5rem; color: var(--dorado); text-transform: uppercase; letter-spacing: 2px; text-shadow: 3px 3px 15px rgba(0,0,0,0.8); }
 
-        /* VIP BANNER - 30 DÍAS */
         .vip-banner {
-            background: linear-gradient(135deg, rgba(200, 16, 46, 0.85), rgba(0,0,0,0.9));
+            background: linear-gradient(135deg, rgba(200, 16, 46, 0.9), rgba(0,0,0,0.95));
             padding: 35px; border-radius: 25px; border: 2px solid var(--dorado); 
             text-align: center; margin-bottom: 40px; box-shadow: 0 15px 50px rgba(0,0,0,0.7);
-            backdrop-filter: blur(8px);
+            backdrop-filter: blur(10px);
         }
-        .vip-banner h2 { font-family: 'Playfair Display'; margin-bottom: 5px; font-size: 1.8rem; color: #fff; }
-        .vip-banner .precio-vip { font-size: 2.8rem; font-weight: 800; margin: 10px 0; color: var(--dorado); }
-        .vip-banner p { font-weight: bold; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 1px; }
+        .vip-banner h2 { font-family: 'Playfair Display'; font-size: 1.8rem; color: #fff; margin-bottom: 5px; }
+        .vip-banner .precio-vip { font-size: 3rem; font-weight: 800; margin: 10px 0; color: var(--dorado); }
 
         .categoria-header { 
-            background: rgba(212, 175, 55, 0.2); padding: 12px 20px; 
-            border-left: 6px solid var(--dorado); margin: 45px 0 20px;
-            font-family: 'Playfair Display'; font-size: 1.6rem; color: var(--dorado);
-            text-transform: uppercase; backdrop-filter: blur(5px);
+            background: rgba(212, 175, 55, 0.25); padding: 15px 20px; 
+            border-left: 6px solid var(--dorado); margin: 50px 0 20px;
+            font-family: 'Playfair Display'; font-size: 1.4rem; color: #fff;
+            text-transform: uppercase; letter-spacing: 1px; backdrop-filter: blur(5px);
         }
 
         .nivel-row {
             display: flex; justify-content: space-between; align-items: center;
-            background: rgba(15, 15, 15, 0.85); padding: 20px; border-radius: 20px; 
-            margin-bottom: 15px; border: 1px solid rgba(255,255,255,0.15);
-            transition: all 0.3s ease; backdrop-filter: blur(12px);
+            background: rgba(15, 15, 15, 0.8); padding: 22px; border-radius: 20px; 
+            margin-bottom: 15px; border: 1px solid rgba(255,255,255,0.1);
+            transition: all 0.3s ease; backdrop-filter: blur(15px);
         }
-        .nivel-row:hover { border-color: var(--dorado); transform: scale(1.02); }
+        .nivel-row:hover { border-color: var(--dorado); transform: translateY(-3px); background: rgba(30, 30, 30, 0.9); }
 
         .btn { padding: 14px 24px; border-radius: 12px; border: none; font-weight: 800; cursor: pointer; text-transform: uppercase; font-size: 0.8rem; transition: 0.3s; }
         .btn-gold { background: var(--dorado); color: black; box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3); }
         .btn-red { background: var(--rojo); color: white; }
 
-        /* FOOTER CON FOTO GRUPAL */
         .footer-social { 
-            margin-top: 60px; text-align: center; padding: 50px 20px; 
+            margin-top: 80px; text-align: center; padding: 60px 20px; 
             background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.9)), url('grupal.jpeg');
             background-size: cover; background-position: center;
             border-radius: 25px; border: 1px solid var(--dorado);
-            box-shadow: 0 -10px 40px rgba(0,0,0,0.5);
         }
+        .social-links { display: flex; justify-content: center; gap: 15px; margin-top: 25px; }
+        .social-links a { color: white; text-decoration: none; font-weight: bold; padding: 14px 28px; border: 2px solid var(--dorado); border-radius: 50px; background: rgba(0,0,0,0.8); }
 
-        .social-links { display: flex; justify-content: center; gap: 15px; margin-top: 25px; flex-wrap: wrap; }
-        .social-links a { 
-            color: white; text-decoration: none; font-weight: bold; 
-            padding: 14px 28px; border: 2px solid var(--dorado); border-radius: 50px; 
-            font-size: 0.9rem; transition: 0.3s; background: rgba(0,0,0,0.8);
-        }
-        .social-links a:hover { background: var(--dorado); color: black; box-shadow: 0 0 20px var(--dorado); }
-
-        /* MODAL */
         .modal { position: fixed; inset: 0; background: rgba(0,0,0,0.98); display: none; align-items: center; justify-content: center; z-index: 9999; }
         .modal-content { width: 95%; max-width: 900px; }
         .v-cont { position: relative; padding-bottom: 56.25%; height: 0; background: #000; border-radius: 15px; overflow: hidden; border: 2px solid var(--dorado); }
@@ -86,49 +70,61 @@
 
     <div class="container">
         <header>
-            <p style="letter-spacing: 6px; font-size: 0.75rem; color: var(--dorado); font-weight: bold; margin-bottom: 10px;">ESTUDIO DE BAILE PROFESIONAL</p>
+            <p style="letter-spacing: 5px; font-size: 0.7rem; color: var(--dorado); font-weight: bold; margin-bottom: 10px;">FORMACIÓN PROFESIONAL</p>
             <h1>Jackson Bahía Cia</h1>
         </header>
 
         <div class="vip-banner">
-            <h2>👑 MEMBRESÍA VIP ELITE</h2>
-            <p>Acceso a TODO el contenido por 30 días</p>
+            <h2>👑 BACHATA ACCESO TOTAL</h2>
+            <p>Todos los niveles por 30 días</p>
             <div class="precio-vip">$60.000</div>
-            <button class="btn btn-gold" onclick="abrirPago('VIP', 'https://link.uala.com.ar/JACKSON_VIP')">OBTENER ACCESO 30 DÍAS</button>
+            <button class="btn btn-gold" onclick="abrirPago('VIP', 'https://link.uala.com.ar/JACKSON_VIP')">OBTENER PASE VIP</button>
         </div>
 
         <div id="app-catalog"></div>
 
         <div class="footer-social">
             <h3 style="font-family: 'Playfair Display'; color: var(--dorado); font-size: 1.8rem;">Sumate a la Familia</h3>
-            <p style="font-size: 1rem; opacity: 0.9;">Consultas por WhatsApp e Instagram</p>
             <div class="social-links">
                 <a href="https://wa.me/542914220136" target="_blank">WhatsApp</a>
                 <a href="https://instagram.com/jacksonbahiaok" target="_blank">Instagram</a>
             </div>
-            <p style="margin-top: 35px; font-size: 0.75rem; opacity: 0.6;">© 2026 JACKSON BAHÍA CIA. BAHÍA BLANCA, ARGENTINA.</p>
+            <p style="margin-top: 35px; font-size: 0.75rem; opacity: 0.6;">© 2026 JACKSON BAHÍA CIA.</p>
         </div>
     </div>
 
     <div id="vModal" class="modal">
         <div class="modal-content">
             <div class="v-cont" id="player"></div>
-            <button onclick="cerrarV()" class="btn btn-red" style="width:100%; border-radius:0; padding: 20px; font-size: 1rem;">VOLVER AL MENÚ</button>
+            <button onclick="cerrarV()" class="btn btn-red" style="width:100%; border-radius:0; padding: 20px;">VOLVER AL CATÁLOGO</button>
         </div>
     </div>
 
     <script>
-        // CONFIGURACIÓN DE CURSOS (Acceso 30 días)
         const cursos = [
-            { id: 'mus', cat: 'TEORÍA', n: 'Musicalidad Aplicada', p: '20.000', vid: 'ID_VIDEO', pl: false, link: 'https://link.uala.com.ar/mus' },
-            { id: 'b1', cat: 'INDIVIDUAL', n: 'Básicos Nivel 1', p: '20.000', vid: 'ID_PL', pl: true, link: 'https://link.uala.com.ar/b1' },
-            { id: 'p1', cat: 'PAREJA', n: 'Pareja Nivel 1', p: '25.000', vid: 'ID_PL', pl: true, link: 'https://link.uala.com.ar/p1' },
-            { id: 's1', cat: 'SHINES', n: 'Shines Nivel 1', p: '20.000', vid: 'ID_PL', pl: true, link: 'https://link.uala.com.ar/s1' }
+            // TEORÍA
+            { id: 'mus', cat: 'TEORÍA Y MUSICALIDAD', n: 'Bachata Musicalidad', p: '20.000', vid: 'ID_YOUTUBE', pl: false, link: 'LINK_PAGO' },
+
+            // BÁSICOS INDIVIDUAL
+            { id: 'b1', cat: 'BACHATA BÁSICOS (Individual)', n: 'Bachata Básicos - Nivel 1', p: '20.000', vid: 'ID_PL', pl: true, link: 'LINK_PAGO' },
+            { id: 'b2', cat: 'BACHATA BÁSICOS (Individual)', n: 'Bachata Básicos - Nivel 2', p: '20.000', vid: 'ID_PL', pl: true, link: 'LINK_PAGO' },
+            { id: 'b3', cat: 'BACHATA BÁSICOS (Individual)', n: 'Bachata Básicos - Nivel 3', p: '25.000', vid: 'ID_PL', pl: true, link: 'LINK_PAGO' },
+            { id: 'b4', cat: 'BACHATA BÁSICOS (Individual)', n: 'Bachata Básicos - Nivel 4', p: '25.000', vid: 'ID_PL', pl: true, link: 'LINK_PAGO' },
+
+            // PAREJA
+            { id: 'p1', cat: 'BACHATA EN PAREJA', n: 'Bachata Pareja - Nivel 1', p: '25.000', vid: 'ID_PL', pl: true, link: 'LINK_PAGO' },
+            { id: 'p2', cat: 'BACHATA EN PAREJA', n: 'Bachata Pareja - Nivel 2', p: '30.000', vid: 'ID_PL', pl: true, link: 'LINK_PAGO' },
+            { id: 'p3', cat: 'BACHATA EN PAREJA', n: 'Bachata Pareja - Nivel 3', p: '30.000', vid: 'ID_PL', pl: true, link: 'LINK_PAGO' },
+            { id: 'p4', cat: 'BACHATA EN PAREJA', n: 'Bachata Pareja - Nivel 4', p: '40.000', vid: 'ID_PL', pl: true, link: 'LINK_PAGO' },
+
+            // SHINES
+            { id: 's1', cat: 'BACHATA SHINES (Pasos Sueltos)', n: 'Bachata Shines - Nivel 1', p: '20.000', vid: 'ID_PL', pl: true, link: 'LINK_PAGO' },
+            { id: 's2', cat: 'BACHATA SHINES (Pasos Sueltos)', n: 'Bachata Shines - Nivel 2', p: '20.000', vid: 'ID_PL', pl: true, link: 'LINK_PAGO' },
+            { id: 's3', cat: 'BACHATA SHINES (Pasos Sueltos)', n: 'Bachata Shines - Nivel 3', p: '25.000', vid: 'ID_PL', pl: true, link: 'LINK_PAGO' },
+            { id: 's4', cat: 'BACHATA SHINES (Pasos Sueltos)', n: 'Bachata Shines - Nivel 4', p: '30.000', vid: 'ID_PL', pl: true, link: 'LINK_PAGO' }
         ];
 
-        const TIEMPO_ACCESO = 30 * 24 * 60 * 60 * 1000; // 30 días en milisegundos
-
-        // Cargar accesos guardados con fecha
+        const TIEMPO_ACCESO = 30 * 24 * 60 * 60 * 1000;
         let accesosData = JSON.parse(localStorage.getItem('jbc_data')) || {};
 
         function render() {
@@ -143,35 +139,29 @@
                     currentCat = c.cat;
                 }
                 
-                // Verificar si tiene acceso individual o VIP y si no venció
                 const fechaPago = accesosData[c.id] || accesosData['VIP'];
                 const activo = fechaPago && (ahora - fechaPago < TIEMPO_ACCESO);
-                
-                let diasRestantes = 0;
-                if(activo) {
-                    diasRestantes = Math.ceil((TIEMPO_ACCESO - (ahora - fechaPago)) / (1000 * 60 * 60 * 24));
-                }
+                const diasRestantes = activo ? Math.ceil((TIEMPO_ACCESO - (ahora - fechaPago)) / (1000 * 60 * 60 * 24)) : 0;
 
                 cont.innerHTML += `
                     <div class="nivel-row">
                         <div style="text-align: left;">
-                            <h3 style="font-size: 1.1rem; margin-bottom: 2px;">${c.n}</h3>
-                            <span style="font-size: 0.85rem; color: ${activo ? '#2ecc71' : '#ccc'}">
-                                ${activo ? `ACTIVO (Faltan ${diasRestantes} días)` : '$' + c.p}
+                            <h3 style="font-size: 1rem; color: #fff;">${c.n}</h3>
+                            <span style="font-size: 0.85rem; color: ${activo ? '#2ecc71' : 'var(--dorado)'}; font-weight: bold;">
+                                ${activo ? `HABILITADO (${diasRestantes} días)` : '$' + c.p}
                             </span>
                         </div>
                         <button class="btn ${activo ? 'btn-red' : 'btn-gold'}" 
                                 onclick="${activo ? `ver('${c.vid}', ${c.pl})` : `abrirPago('${c.id}', '${c.link}')`}">
-                            ${activo ? 'VER CLASE' : 'COMPRAR'}
+                            ${activo ? 'ENTRAR' : 'COMPRAR'}
                         </button>
                     </div>`;
             });
         }
 
         function abrirPago(id, link) {
-            if(confirm("Se abrirá el link de pago por 30 días de acceso.")) {
+            if(confirm("Confirmar para ir al portal de pago seguro.")) {
                 window.open(link, '_blank');
-                // Guardar fecha de compra actual
                 accesosData[id] = Date.now();
                 localStorage.setItem('jbc_data', JSON.stringify(accesosData));
                 render();
