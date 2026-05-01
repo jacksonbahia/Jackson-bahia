@@ -5,43 +5,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Jackson Bahia Cia</title>
 
-<!-- SEO -->
-<meta name="description" content="Clases de bachata online - Jackson Bahia Cia">
-
-<!-- Google Fonts -->
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet">
-
-<!-- Particles -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600;800&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/particles.js"></script>
 
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
-body{background:#0a0a0f;color:white;overflow-x:hidden;}
-
-#particles-js{
-position:fixed;
-width:100%;
-height:100%;
-z-index:-1;
-}
-
-/* NAV */
-nav{
-position:fixed;
-width:100%;
-top:0;
-background:rgba(0,0,0,0.6);
-backdrop-filter:blur(10px);
-display:flex;
-justify-content:space-between;
-padding:15px 40px;
-z-index:1000;
-}
-
-nav a{
+body{
+margin:0;
+font-family:Poppins;
+background:#0a0a0f;
 color:white;
-text-decoration:none;
-margin:0 10px;
 }
 
 /* HERO */
@@ -55,64 +27,57 @@ text-align:center;
 }
 
 .hero h1{
-font-size:60px;
+font-size:70px;
+font-weight:800;
+letter-spacing:2px;
 background:linear-gradient(45deg,#ff00cc,#3333ff);
 -webkit-background-clip:text;
 color:transparent;
-animation:glow 2s infinite alternate;
+text-shadow:0 0 30px rgba(255,0,200,0.6);
 }
 
-@keyframes glow{
-from{text-shadow:0 0 10px #ff00cc;}
-to{text-shadow:0 0 30px #3333ff;}
+.hero p{
+font-size:18px;
+opacity:0.8;
 }
 
-.btn{
-padding:12px 25px;
-background:linear-gradient(45deg,#ff00cc,#3333ff);
-border:none;
-color:white;
-cursor:pointer;
-border-radius:30px;
-transition:0.3s;
-margin-top:20px;
-}
-
-.btn:hover{
-transform:scale(1.1);
-}
-
-/* SECTIONS */
+/* CURSOS */
 .section{
-padding:100px 20px;
-max-width:1100px;
+padding:60px 20px;
+max-width:900px;
 margin:auto;
 }
 
-.cards{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-gap:20px;
+.curso{
+margin-bottom:40px;
 }
 
-.card{
+.nivel{
+display:flex;
+justify-content:space-between;
+align-items:center;
 background:rgba(255,255,255,0.05);
-padding:20px;
-border-radius:15px;
-transition:0.3s;
+padding:10px 15px;
+margin:8px 0;
+border-radius:10px;
 }
 
-.card:hover{
-transform:translateY(-10px);
+.btn{
+background:linear-gradient(45deg,#ff00cc,#3333ff);
+border:none;
+padding:8px 15px;
+color:white;
+border-radius:20px;
+cursor:pointer;
 }
 
 /* MODAL */
 .modal{
-position:fixed;
-top:0;left:0;
-width:100%;height:100%;
-background:rgba(0,0,0,0.8);
 display:none;
+position:fixed;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.9);
 justify-content:center;
 align-items:center;
 }
@@ -120,156 +85,142 @@ align-items:center;
 .modal-content{
 background:#111;
 padding:30px;
+max-width:400px;
 border-radius:10px;
 text-align:center;
 }
 
-/* FOOTER */
-footer{
+/* LOGIN */
+.login{
 text-align:center;
-padding:40px;
-background:#111;
+margin-top:20px;
 }
 
-footer a{
-margin:10px;
-color:white;
-text-decoration:none;
+input{
+padding:10px;
+margin:5px;
+border:none;
+border-radius:5px;
+}
+
+/* ADMIN */
+#adminPanel{
+display:none;
+padding:20px;
+background:#111;
+margin-top:20px;
 }
 </style>
 </head>
 
 <body>
 
-<div id="particles-js"></div>
+<div class="hero">
+<h1>BIENVENIDOS A JACKSON BAHIA CIA</h1>
+<p>Clases de bachata online para todo público</p>
 
-<nav>
-<div>Jackson Bahia</div>
-<div>
-<a href="#cursos">Cursos</a>
-<a href="#videos">Videos</a>
-<a href="#login">Login</a>
+<div class="login">
+<input id="user" placeholder="Email">
+<input id="pass" type="password" placeholder="Contraseña">
+<button class="btn" onclick="login()">Ingresar</button>
 </div>
-</nav>
-
-<section class="hero">
-<h1>Jackson Bahia Cia</h1>
-<p>CLASES DE BACHATA ONLINE</p>
-<button class="btn" onclick="scrollToCursos()">Ver Clases</button>
-</section>
-
-<section id="cursos" class="section">
-<h2>Cursos</h2>
-
-<div class="cards">
-
-<div class="card">
-<h3>Básicos</h3>
-<button class="btn" onclick="comprar('Basico 1')">Nivel 1</button>
-<button class="btn" onclick="comprar('Basico 2')">Nivel 2</button>
-<button class="btn" onclick="comprar('Basico 3')">Nivel 3</button>
-<button class="btn" onclick="comprar('Basico 4')">Nivel 4</button>
 </div>
 
-<div class="card">
-<h3>Pareja</h3>
-<button class="btn" onclick="comprar('Pareja 1')">Nivel 1</button>
-<button class="btn" onclick="comprar('Pareja 2')">Nivel 2</button>
-<button class="btn" onclick="comprar('Pareja 3')">Nivel 3</button>
-<button class="btn" onclick="comprar('Pareja 4')">Nivel 4</button>
+<div class="section">
+
+<div class="curso">
+<h2>BACHATA PASOS BÁSICOS</h2>
+<div class="nivel">Nivel 1 <button class="btn" onclick="invertir('Basico 1')">Invertir</button></div>
+<div class="nivel">Nivel 2 <button class="btn" onclick="invertir('Basico 2')">Invertir</button></div>
+<div class="nivel">Nivel 3 <button class="btn" onclick="invertir('Basico 3')">Invertir</button></div>
+<div class="nivel">Nivel 4 <button class="btn" onclick="invertir('Basico 4')">Invertir</button></div>
 </div>
 
-<div class="card">
-<h3>Shines</h3>
-<button class="btn" onclick="comprar('Shine 1')">Nivel 1</button>
-<button class="btn" onclick="comprar('Shine 2')">Nivel 2</button>
-<button class="btn" onclick="comprar('Shine 3')">Nivel 3</button>
-<button class="btn" onclick="comprar('Shine 4')">Nivel 4</button>
+<div class="curso">
+<h2>BACHATA PAREJA</h2>
+<div class="nivel">Nivel 1 <button class="btn" onclick="invertir('Pareja 1')">Invertir</button></div>
+<div class="nivel">Nivel 2 <button class="btn" onclick="invertir('Pareja 2')">Invertir</button></div>
+<div class="nivel">Nivel 3 <button class="btn" onclick="invertir('Pareja 3')">Invertir</button></div>
+<div class="nivel">Nivel 4 <button class="btn" onclick="invertir('Pareja 4')">Invertir</button></div>
 </div>
 
-<div class="card">
-<h3>Musicalidad</h3>
-<button class="btn" onclick="comprar('Musicalidad')">Comprar</button>
+<div class="curso">
+<h2>SHINES</h2>
+<div class="nivel">Nivel 1 <button class="btn" onclick="invertir('Shine 1')">Invertir</button></div>
+<div class="nivel">Nivel 2 <button class="btn" onclick="invertir('Shine 2')">Invertir</button></div>
+<div class="nivel">Nivel 3 <button class="btn" onclick="invertir('Shine 3')">Invertir</button></div>
+<div class="nivel">Nivel 4 <button class="btn" onclick="invertir('Shine 4')">Invertir</button></div>
+</div>
+
+<div class="curso">
+<h2>MEMBRESÍAS</h2>
+<div class="nivel">Nivel 1-4 (30 días) $20.000 <button class="btn" onclick="invertir('Membresia')">Invertir</button></div>
+<div class="nivel">VIP (todo el contenido) $60.000 <button class="btn" onclick="invertir('VIP')">Invertir</button></div>
 </div>
 
 </div>
-</section>
 
-<section id="videos" class="section">
-<h2>Mis Cursos</h2>
-<ul id="misCursos"></ul>
-</section>
-
-<section id="login" class="section">
-<h2>Login</h2>
-<input type="text" id="user" placeholder="Usuario"><br><br>
-<input type="password" id="pass" placeholder="Contraseña"><br><br>
-<button class="btn" onclick="login()">Entrar</button>
-</section>
-
+<!-- MODAL -->
 <div id="modal" class="modal">
 <div class="modal-content">
-<h2>Compra realizada</h2>
-<button class="btn" onclick="cerrarModal()">Cerrar</button>
+<h3>Bienvenido</h3>
+<p>
+Para acceder al contenido debes transferir al:<br><br>
+<b>Alias:</b> JACKSON.BAHIA<br>
+<b>Titular:</b> Diego Antonio Pimentel<br><br>
+Enviar comprobante a:<br>
+<b>2914220136</b>
+</p>
+<button class="btn" onclick="cerrar()">Cerrar</button>
 </div>
 </div>
 
-<footer>
-<p>Redes:</p>
-<a href="#">Instagram</a>
-<a href="#">Facebook</a>
-<a href="#">YouTube</a>
-<a href="#">WhatsApp</a>
-</footer>
+<!-- ADMIN -->
+<div id="adminPanel">
+<h2>Panel Admin</h2>
+<p>Usuarios pendientes (simulado)</p>
+<ul id="lista"></ul>
+</div>
 
 <script>
-// SCROLL
-function scrollToCursos(){
-document.getElementById("cursos").scrollIntoView({behavior:'smooth'});
-}
 
-// LOGIN
-function login(){
-let user=document.getElementById("user").value;
-localStorage.setItem("user",user);
-alert("Bienvenido "+user);
-}
+function invertir(curso){
+let pendientes=JSON.parse(localStorage.getItem("pendientes")||"[]");
+pendientes.push(curso);
+localStorage.setItem("pendientes",JSON.stringify(pendientes));
 
-// COMPRAR
-function comprar(curso){
-let cursos=JSON.parse(localStorage.getItem("cursos")||"[]");
-cursos.push(curso);
-localStorage.setItem("cursos",JSON.stringify(cursos));
 document.getElementById("modal").style.display="flex";
-mostrarCursos();
 }
 
-function cerrarModal(){
+function cerrar(){
 document.getElementById("modal").style.display="none";
 }
 
-function mostrarCursos(){
-let lista=document.getElementById("misCursos");
+function login(){
+let u=document.getElementById("user").value;
+let p=document.getElementById("pass").value;
+
+if(u==="admin@jackson.com" && p==="2828"){
+document.getElementById("adminPanel").style.display="block";
+cargarAdmin();
+alert("Admin conectado");
+}else{
+alert("Usuario registrado (simulado)");
+}
+}
+
+function cargarAdmin(){
+let lista=document.getElementById("lista");
 lista.innerHTML="";
-let cursos=JSON.parse(localStorage.getItem("cursos")||"[]");
-cursos.forEach(c=>{
+let datos=JSON.parse(localStorage.getItem("pendientes")||"[]");
+
+datos.forEach(d=>{
 let li=document.createElement("li");
-li.textContent=c;
+li.textContent=d;
 lista.appendChild(li);
 });
 }
 
-mostrarCursos();
-
-// PARTICLES
-particlesJS("particles-js",{
-particles:{
-number:{value:60},
-size:{value:3},
-move:{speed:2},
-line_linked:{enable:true}
-}
-});
 </script>
 
 </body>
