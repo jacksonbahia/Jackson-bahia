@@ -3,9 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Jackson Bahia Cia</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600;900&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/particles.js"></script>
 
 <style>
@@ -14,6 +15,13 @@ margin:0;
 font-family:Poppins;
 background:#0a0a0f;
 color:white;
+}
+
+#particles-js{
+position:fixed;
+width:100%;
+height:100%;
+z-index:-1;
 }
 
 /* HERO */
@@ -27,18 +35,32 @@ text-align:center;
 }
 
 .hero h1{
-font-size:70px;
-font-weight:800;
-letter-spacing:2px;
+font-size:80px;
+font-weight:900;
 background:linear-gradient(45deg,#ff00cc,#3333ff);
 -webkit-background-clip:text;
 color:transparent;
-text-shadow:0 0 30px rgba(255,0,200,0.6);
+animation:glow 2s infinite alternate;
 }
 
-.hero p{
+@keyframes glow{
+from{text-shadow:0 0 20px #ff00cc;}
+to{text-shadow:0 0 50px #3333ff;}
+}
+
+.hero h2{
 font-size:18px;
+font-weight:300;
 opacity:0.8;
+margin-bottom:20px;
+}
+
+/* LOGIN */
+input{
+padding:10px;
+margin:5px;
+border:none;
+border-radius:5px;
 }
 
 /* CURSOS */
@@ -57,8 +79,8 @@ display:flex;
 justify-content:space-between;
 align-items:center;
 background:rgba(255,255,255,0.05);
-padding:10px 15px;
-margin:8px 0;
+padding:12px;
+margin:6px 0;
 border-radius:10px;
 }
 
@@ -90,72 +112,68 @@ border-radius:10px;
 text-align:center;
 }
 
-/* LOGIN */
-.login{
-text-align:center;
-margin-top:20px;
-}
-
-input{
-padding:10px;
-margin:5px;
-border:none;
-border-radius:5px;
-}
-
 /* ADMIN */
 #adminPanel{
 display:none;
-padding:20px;
 background:#111;
-margin-top:20px;
+padding:20px;
+margin:20px;
 }
 </style>
 </head>
 
 <body>
 
-<div class="hero">
-<h1>BIENVENIDOS A JACKSON BAHIA CIA</h1>
-<p>Clases de bachata online para todo público</p>
+<div id="particles-js"></div>
 
-<div class="login">
+<div class="hero">
+<h1>JACKSON BAHIA CIA</h1>
+<h2>Bienvenidos - Clases de bachata online para todo público</h2>
+
 <input id="user" placeholder="Email">
 <input id="pass" type="password" placeholder="Contraseña">
 <button class="btn" onclick="login()">Ingresar</button>
 </div>
-</div>
 
 <div class="section">
 
+<!-- BASICOS -->
 <div class="curso">
 <h2>BACHATA PASOS BÁSICOS</h2>
+
 <div class="nivel">Nivel 1 <button class="btn" onclick="invertir('Basico 1')">Invertir</button></div>
 <div class="nivel">Nivel 2 <button class="btn" onclick="invertir('Basico 2')">Invertir</button></div>
 <div class="nivel">Nivel 3 <button class="btn" onclick="invertir('Basico 3')">Invertir</button></div>
 <div class="nivel">Nivel 4 <button class="btn" onclick="invertir('Basico 4')">Invertir</button></div>
+
+<div class="nivel">Membresía Completa (requiere nivel 1-4) $20.000 
+<button class="btn" onclick="invertir('Membresia Basico')">Invertir</button></div>
 </div>
 
+<!-- PAREJA -->
 <div class="curso">
 <h2>BACHATA PAREJA</h2>
+
 <div class="nivel">Nivel 1 <button class="btn" onclick="invertir('Pareja 1')">Invertir</button></div>
 <div class="nivel">Nivel 2 <button class="btn" onclick="invertir('Pareja 2')">Invertir</button></div>
 <div class="nivel">Nivel 3 <button class="btn" onclick="invertir('Pareja 3')">Invertir</button></div>
 <div class="nivel">Nivel 4 <button class="btn" onclick="invertir('Pareja 4')">Invertir</button></div>
+
+<div class="nivel">Membresía Completa $20.000 
+<button class="btn" onclick="invertir('Membresia Pareja')">Invertir</button></div>
 </div>
 
+<!-- SHINES -->
 <div class="curso">
 <h2>SHINES</h2>
+
 <div class="nivel">Nivel 1 <button class="btn" onclick="invertir('Shine 1')">Invertir</button></div>
 <div class="nivel">Nivel 2 <button class="btn" onclick="invertir('Shine 2')">Invertir</button></div>
 <div class="nivel">Nivel 3 <button class="btn" onclick="invertir('Shine 3')">Invertir</button></div>
 <div class="nivel">Nivel 4 <button class="btn" onclick="invertir('Shine 4')">Invertir</button></div>
-</div>
 
-<div class="curso">
-<h2>MEMBRESÍAS</h2>
-<div class="nivel">Nivel 1-4 (30 días) $20.000 <button class="btn" onclick="invertir('Membresia')">Invertir</button></div>
-<div class="nivel">VIP (todo el contenido) $60.000 <button class="btn" onclick="invertir('VIP')">Invertir</button></div>
+<div class="nivel">Membresía Completa $20.000 
+<button class="btn" onclick="invertir('Membresia Shine')">Invertir</button></div>
 </div>
 
 </div>
@@ -165,9 +183,8 @@ margin-top:20px;
 <div class="modal-content">
 <h3>Bienvenido</h3>
 <p>
-Para acceder al contenido debes transferir al:<br><br>
-<b>Alias:</b> JACKSON.BAHIA<br>
-<b>Titular:</b> Diego Antonio Pimentel<br><br>
+Alias: JACKSON.BAHIA<br>
+Titular: Diego Antonio Pimentel<br><br>
 Enviar comprobante a:<br>
 <b>2914220136</b>
 </p>
@@ -178,40 +195,57 @@ Enviar comprobante a:<br>
 <!-- ADMIN -->
 <div id="adminPanel">
 <h2>Panel Admin</h2>
-<p>Usuarios pendientes (simulado)</p>
 <ul id="lista"></ul>
 </div>
 
 <script>
 
+// LOGIN REAL (localStorage)
+function login(){
+let u=document.getElementById("user").value;
+let p=document.getElementById("pass").value;
+
+if(u==="admin@jackson.com" && p==="2828"){
+localStorage.setItem("admin","true");
+alert("Admin conectado");
+mostrarAdmin();
+}else{
+localStorage.setItem("usuario",u);
+alert("Usuario logueado");
+}
+}
+
+// BLOQUEO SI NO ESTA LOGUEADO
 function invertir(curso){
+let user=localStorage.getItem("usuario") || localStorage.getItem("admin");
+
+if(!user){
+alert("Debes iniciar sesión primero");
+return;
+}
+
 let pendientes=JSON.parse(localStorage.getItem("pendientes")||"[]");
 pendientes.push(curso);
 localStorage.setItem("pendientes",JSON.stringify(pendientes));
 
 document.getElementById("modal").style.display="flex";
+cargarAdmin();
 }
 
 function cerrar(){
 document.getElementById("modal").style.display="none";
 }
 
-function login(){
-let u=document.getElementById("user").value;
-let p=document.getElementById("pass").value;
-
-if(u==="admin@jackson.com" && p==="2828"){
+// ADMIN
+function mostrarAdmin(){
 document.getElementById("adminPanel").style.display="block";
 cargarAdmin();
-alert("Admin conectado");
-}else{
-alert("Usuario registrado (simulado)");
-}
 }
 
 function cargarAdmin(){
 let lista=document.getElementById("lista");
 lista.innerHTML="";
+
 let datos=JSON.parse(localStorage.getItem("pendientes")||"[]");
 
 datos.forEach(d=>{
@@ -220,6 +254,11 @@ li.textContent=d;
 lista.appendChild(li);
 });
 }
+
+// PARTICULAS
+particlesJS("particles-js",{
+particles:{number:{value:60},size:{value:3},move:{speed:2}}
+});
 
 </script>
 
