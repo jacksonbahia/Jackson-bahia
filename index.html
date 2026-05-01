@@ -30,7 +30,7 @@
             scroll-behavior: smooth;
         }
 
-        /* --- FONDO DINÁMICO --- */
+        /* --- FONDO DINÁMICO CON TU FOTO --- */
         #particles-js {
             position: fixed;
             width: 100%;
@@ -133,12 +133,11 @@
 
         .btn-pay:hover { background: white; transform: scale(1.05); }
         
-        /* Estados de botón */
         .btn-view { background: var(--exito); color: white; }
         .btn-expired { background: var(--rojo); color: white; }
 
         .time-badge {
-            display: block; font-size: 0.65rem; color: var(--exito); margin-top: 4px;
+            display: block; font-size: 0.65rem; color: var(--exito); margin-top: 4px; text-align: right;
         }
 
         /* --- MODAL --- */
@@ -174,38 +173,44 @@
         <img src="LOGO Jackson Bahia oficial.jpg" class="hero-logo" alt="Logo">
         <h1>Jackson Bahía Cia</h1>
         <p class="subtitle">CLASES DE BACHATA ONLINE</p>
-        <button class="btn-pay" style="padding: 15px 40px;" onclick="document.getElementById('cursos').scrollIntoView()">Ver mis Clases</button>
+        <button class="btn-pay" style="padding: 15px 40px;" onclick="document.getElementById('cursos').scrollIntoView()">Explorar Niveles</button>
     </section>
 
     <div class="container" id="cursos">
-        <h2 class="section-title">Nuestra Academia</h2>
+        <h2 class="section-title">Programas de Formación</h2>
         <div class="course-grid" id="courseContainer"></div>
     </div>
 
     <div class="modal" id="modal">
         <div class="modal-content">
-            <i data-lucide="credit-card" style="color: var(--dorado); width: 50px; height: 50px; margin-bottom: 15px;"></i>
-            <h2 id="modalTitle">Confirmar Acceso</h2>
-            <p id="modalText" style="margin: 20px 0; color: #aaa;">El acceso a este nivel tendrá una duración de 30 días corridos.</p>
+            <i data-lucide="play-circle" style="color: var(--dorado); width: 50px; height: 50px; margin-bottom: 15px;"></i>
+            <h2 id="modalTitle">Confirmar Inscripción</h2>
+            <p id="modalText" style="margin: 20px 0; color: #aaa;">Al confirmar, tendrás acceso total al contenido por los próximos 30 días.</p>
             <div id="modalActions">
-                 <button class="btn-pay" onclick="confirmarCompra()">Confirmar Pago ($)</button>
-                 <button onclick="cerrarModal()" style="background:none; border:none; color:white; margin-left:15px; cursor:pointer;">Cancelar</button>
+                 <button class="btn-pay" onclick="confirmarCompra()">Confirmar Pago</button>
+                 <button onclick="cerrarModal()" style="background:none; border:none; color:white; margin-left:15px; cursor:pointer; font-size:0.8rem;">Cerrar</button>
             </div>
         </div>
     </div>
 
     <footer>
+        <div style="margin-bottom: 20px; display: flex; justify-content: center; gap: 20px;">
+            <a href="https://instagram.com/jacksonbahiaok" target="_blank" style="color:white;"><i data-lucide="instagram"></i></a>
+            <a href="https://wa.me/542914220136" target="_blank" style="color:white;"><i data-lucide="message-circle"></i></a>
+        </div>
         <p>© 2026 Jackson Bahía Cia - Todos los derechos reservados</p>
     </footer>
 
     <script>
-        const DURACION_ACCESO = 30 * 24 * 60 * 60 * 1000; // 30 días en ms
+        const DURACION_ACCESO = 30 * 24 * 60 * 60 * 1000; // 30 días
         
+        // --- BASE DE DATOS DE CURSOS ---
+        // He agregado el link que enviaste al id 'b-1'
         const cursosData = [
-            { id: 'b', cat: 'Bachata Básicos', niveles: [1, 2, 3, 4], link: 'https://youtu.be/8Ne_yfRQfEA' },
-            { id: 'p', cat: 'Bachata en Pareja', niveles: [1, 2, 3, 4], link: '#' },
-            { id: 's', cat: 'Shines (Pasos Sueltos)', niveles: [1, 2, 3, 4], link: '#' },
-            { id: 'm', cat: 'Comprensión Musical', niveles: ['Único'], link: '#' }
+            { id: 'b', cat: 'Bachata Básicos', niveles: [1, 2, 3, 4], links: { '1': 'https://youtu.be/8Ne_yfRQfEA' } },
+            { id: 'p', cat: 'Bachata en Pareja', niveles: [1, 2, 3, 4], links: {} },
+            { id: 's', cat: 'Shines (Pasos Sueltos)', niveles: [1, 2, 3, 4], links: {} },
+            { id: 'm', cat: 'Comprensión Musical', niveles: ['Único'], links: { 'Único': '#' } }
         ];
 
         let userState = JSON.parse(localStorage.getItem('jb_user')) || { logged: false, courses: {} };
@@ -222,6 +227,7 @@
                         ${curso.niveles.map(lvl => {
                             const prodId = `${curso.id}-${lvl}`;
                             const dataCompra = userState.courses[prodId];
+                            const videoUrl = curso.links[lvl] || '#';
                             
                             let btnHtml = '';
                             if (dataCompra) {
@@ -230,11 +236,11 @@
                                     const diasFaltan = Math.ceil((DURACION_ACCESO - tiempoTranscurrido) / (1000 * 60 * 60 * 24));
                                     btnHtml = `
                                         <div>
-                                            <button class="btn-pay btn-view" onclick="window.open('${curso.link}', '_blank')">VER VIDEO</button>
-                                            <span class="time-badge">Faltan ${diasFaltan} días</span>
+                                            <button class="btn-pay btn-view" onclick="window.open('${videoUrl}', '_blank')">ACCEDER AHORA</button>
+                                            <span class="time-badge">Quedan ${diasFaltan} días</span>
                                         </div>`;
                                 } else {
-                                    btnHtml = `<button class="btn-pay btn-expired" onclick="intentarCompra('${prodId}')">EXPIRADO - PAGAR</button>`;
+                                    btnHtml = `<button class="btn-pay btn-expired" onclick="intentarCompra('${prodId}')">ACCESO EXPIRADO</button>`;
                                 }
                             } else {
                                 btnHtml = `<button class="btn-pay" onclick="intentarCompra('${prodId}')">PAGAR</button>`;
@@ -242,4 +248,67 @@
 
                             return `
                                 <div class="level-item">
-                                
+                                    <span>Nivel ${lvl}</span>
+                                    ${btnHtml}
+                                </div>`;
+                        }).join('')}
+                    </div>
+                </div>
+            `).join('');
+            
+            updateUserNav();
+        }
+
+        function updateUserNav() {
+            const userArea = document.getElementById('userArea');
+            if(userState.logged) {
+                userArea.innerHTML = `<span>Hola Alumno!</span> | <button onclick="logout()" style="background:none; border:none; color:var(--dorado); cursor:pointer; margin-left:10px; font-weight:bold;">Salir</button>`;
+            }
+        }
+
+        function toggleLogin() {
+            userState.logged = true;
+            saveState();
+            renderCursos();
+            alert("Has ingresado a la plataforma.");
+        }
+
+        function logout() {
+            userState.logged = false;
+            saveState();
+            location.reload();
+        }
+
+        function intentarCompra(id) {
+            if(!userState.logged) { alert("Inicia sesión para poder adquirir niveles."); return; }
+            selectedProduct = id;
+            document.getElementById('modal').style.display = 'flex';
+        }
+
+        function confirmarCompra() {
+            userState.courses[selectedProduct] = { fecha: Date.now() };
+            saveState();
+            cerrarModal();
+            renderCursos();
+        }
+
+        function cerrarModal() { document.getElementById('modal').style.display = 'none'; }
+
+        function saveState() { localStorage.setItem('jb_user', JSON.stringify(userState)); }
+
+        // Inicialización
+        lucide.createIcons();
+        renderCursos();
+
+        particlesJS('particles-js', {
+            "particles": {
+                "number": { "value": 110 },
+                "color": { "value": "#D4AF37" },
+                "size": { "value": 2.5, "random": true },
+                "move": { "enable": true, "speed": 1.5, "direction": "top" },
+                "opacity": { "value": 0.4, "random": true }
+            }
+        });
+    </script>
+</body>
+</html>
