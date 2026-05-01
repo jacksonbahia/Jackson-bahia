@@ -3,169 +3,140 @@
 <head>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Jackson Bahía Cia | Academia Elite</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Plus+Jakarta+Sans:wght@400;700&display=swap" rel="stylesheet"/>
+    <title>Jackson Bahía Cia - OPTIMA CONFIG</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
     <style>
-        :root { --rojo: #C8102E; --dorado: #D4AF37; --oscuro: #0a0a0a; --crema: #f8f1e7; }
+        :root { 
+            --dorado: #D4AF37; 
+            --rojo: #C8102E; 
+            --oscuro: #070707;
+            --glass: rgba(255, 255, 255, 0.08);
+            --shadow: 0 25px 50px rgba(0, 0, 0, 0.9);
+        }
+
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
-        
-        body { background-color: var(--oscuro); color: var(--crema); line-height: 1.6; }
+        body { background-color: var(--oscuro); color: white; overflow-x: hidden; }
 
-        /* FONDO TRASLÚCIDO CON PAREJAS DANCING */
-        .bg-parejas {
-            position: fixed; inset: 0; z-index: -2;
-            background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.95)),
-                        url('parejas_fondo.jpeg'); /* IMAGEN DE PAREJAS EN GITHUB */
-            background-size: cover; background-position: center;
-            opacity: 0.8;
+        /* FONDO DINÁMICO CON TU FOTO PRINCIPAL */
+        .bg-dinamico {
+            position: fixed; inset: 0;
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.85)), url('jack.jpeg');
+            background-size: cover; background-position: center top;
+            z-index: -2;
+            animation: panBg 25s infinite alternate ease-in-out;
+        }
+        @keyframes panBg { from { transform: scale(1); } to { transform: scale(1.15); } }
+
+        /* EFECTO DE CHISPAS/PARTÍCULAS */
+        .sparkles-container { position: relative; display: inline-block; }
+        .sparkles-container::before {
+            content: ''; position: absolute; inset: -20px;
+            background: radial-gradient(circle, var(--dorado) 1px, transparent 1px);
+            background-size: 15px 15px; opacity: 0.3;
+            animation: moveSparkles 4s linear infinite;
+            z-index: -1; pointer-events: none;
+        }
+        @keyframes moveSparkles { from { transform: translateY(0); } to { transform: translateY(-15px); } }
+
+        .container { max-width: 650px; margin: 0 auto; padding: 50px 20px; text-align: center; }
+
+        /* LOGO DINÁMICO */
+        .logo-main { 
+            width: 170px; border-radius: 50%;
+            filter: drop-shadow(0 0 25px rgba(212,175,55,0.4));
+            margin-bottom: 25px;
+            transition: 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .logo-main:hover { transform: scale(1.1) rotate(5deg); }
+
+        h1 { font-family: 'Playfair Display'; font-size: 3rem; text-transform: uppercase; letter-spacing: 2px; text-shadow: 0 0 20px rgba(212,175,55,0.5); }
+        .subtitle { color: var(--dorado); font-weight: 800; letter-spacing: 6px; font-size: 0.95rem; margin-top: 10px; text-shadow: 2px 2px 4px black; }
+
+        /* ESTRUCTURA DE MENÚS GLASSMORPHISM */
+        .category-label { 
+            text-align: left; color: var(--dorado); font-size: 1.2rem; font-weight: 800;
+            margin: 45px 0 20px; border-left: 5px solid var(--dorado); padding-left: 15px;
+            text-transform: uppercase;
         }
 
-        .container { max-width: 650px; margin: 0 auto; padding: 40px 20px; position: relative; }
-        
-        header { text-align: center; margin-bottom: 40px; }
-        h1 { font-family: 'Playfair Display'; font-size: 2.5rem; color: var(--dorado); text-transform: uppercase; letter-spacing: 2px; }
-
-        /* VIP BANNER */
-        .vip-banner {
-            background: linear-gradient(135deg, rgba(200, 16, 46, 0.9), rgba(0,0,0,0.8));
-            padding: 30px; border-radius: 20px; border: 2px solid var(--dorado); 
-            text-align: center; margin-bottom: 40px; box-shadow: 0 10px 40px rgba(0,0,0,0.6);
-            backdrop-filter: blur(5px);
-        }
-        .vip-banner h2 { font-family: 'Playfair Display'; margin-bottom: 10px; font-size: 1.8rem; }
-        .vip-banner .precio-vip { font-size: 2.5rem; font-weight: 800; margin: 15px 0; color: #fff; }
-
-        .categoria-header { 
-            background: rgba(212, 175, 55, 0.15); padding: 12px 20px; 
-            border-left: 5px solid var(--dorado); margin: 45px 0 20px;
-            font-family: 'Playfair Display'; font-size: 1.5rem; color: var(--dorado);
-            text-transform: uppercase; backdrop-filter: blur(3px);
-        }
-
-        .nivel-row {
+        .item-clase {
+            background: var(--glass);
+            backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
+            padding: 22px 30px; border-radius: 20px;
             display: flex; justify-content: space-between; align-items: center;
-            background: rgba(20, 20, 20, 0.7); padding: 20px; border-radius: 18px; 
             margin-bottom: 15px; border: 1px solid rgba(255,255,255,0.1);
-            transition: all 0.3s ease; backdrop-filter: blur(10px);
+            box-shadow: var(--shadow);
+            transition: 0.4s ease;
         }
-        .nivel-row:hover { background: rgba(212, 175, 55, 0.1); border-color: var(--dorado); transform: translateY(-2px); }
+        .item-clase:hover { transform: translateX(12px); border-color: var(--dorado); background: rgba(255,255,255,0.12); }
 
-        .btn { padding: 12px 22px; border-radius: 12px; border: none; font-weight: 800; cursor: pointer; text-transform: uppercase; font-size: 0.75rem; transition: 0.3s; }
-        .btn-gold { background: var(--dorado); color: black; }
-        .btn-red { background: var(--rojo); color: white; }
+        .btn-pago {
+            background: var(--dorado); color: black; border: none;
+            padding: 12px 25px; border-radius: 12px; font-weight: 800;
+            cursor: pointer; transition: 0.3s; text-transform: uppercase; font-size: 0.8rem;
+        }
+        .btn-pago:hover { background: white; transform: scale(1.1); box-shadow: 0 0 20px var(--dorado); }
 
-        .footer-social { margin-top: 60px; text-align: center; border-top: 1px solid rgba(255,255,255,0.1); padding: 40px 20px; }
-        .social-links { display: flex; justify-content: center; gap: 15px; margin-top: 20px; flex-wrap: wrap; }
-        .social-links a { color: white; text-decoration: none; font-weight: bold; padding: 10px 20px; border: 1px solid var(--dorado); border-radius: 50px; font-size: 0.9rem; transition: 0.3s; }
-        .social-links a:hover { background: var(--dorado); color: black; }
+        /* GRILLA DE FOTOS GRUPALES */
+        .galeria { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 50px; }
+        .foto-card { height: 180px; border-radius: 20px; overflow: hidden; border: 1px solid rgba(212,175,55,0.3); box-shadow: var(--shadow); }
+        .foto-card img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; }
+        .foto-card:hover img { transform: scale(1.1); }
 
-        /* MODAL REPRODUCTOR */
-        .modal { position: fixed; inset: 0; background: rgba(0,0,0,0.98); display: none; align-items: center; justify-content: center; z-index: 2000; }
-        .modal-content { width: 95%; max-width: 900px; }
-        .v-cont { position: relative; padding-bottom: 56.25%; height: 0; background: #000; border-radius: 15px; overflow: hidden; }
-        .v-cont iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
+        /* FOOTER REDES */
+        .footer { margin-top: 70px; padding-bottom: 50px; }
+        .redes { display: flex; justify-content: center; gap: 30px; margin-bottom: 25px; }
+        .social-btn { text-decoration: none; color: white; transition: 0.4s; text-align: center; }
+        .social-btn i { font-size: 2.2rem; display: block; margin-bottom: 5px; }
+        .fa-instagram:hover { color: #E1306C; transform: translateY(-5px); }
+        .fa-whatsapp:hover { color: #25D366; transform: translateY(-5px); }
+        .redes span { font-size: 0.7rem; font-weight: 800; color: var(--dorado); text-transform: uppercase; }
+
     </style>
 </head>
 <body>
 
-    <div class="bg-parejas"></div>
+    <div class="bg-dinamico"></div>
 
     <div class="container">
         <header>
-            <p style="letter-spacing: 5px; font-size: 0.7rem; color: var(--dorado); font-weight: bold;">ACADEMIA ELITE</p>
-            <h1>Jackson Bahía Cia</h1>
+            <img src="LOGO Jackson Bahia oficial.jpg" class="logo-main" alt="Logo">
+            <div class="sparkles-container">
+                <h1>Jackson Bahía Cia</h1>
+            </div>
+            <p class="subtitle">CLASES DE BACHATA ONLINE</p>
         </header>
 
-        <div class="vip-banner">
-            <h2>👑 ACCESO TOTAL VIP</h2>
-            <p>Formación completa y acceso de por vida.</p>
-            <div class="precio-vip">$60.000</div>
-            <button class="btn btn-gold" onclick="abrirPago('VIP', 'https://link.uala.com.ar/JACKSON_VIP')">INVERTIR EN TODO</button>
+        <div class="category-label">Bachata Básicos</div>
+        <div class="item-clase"><p>Nivel 1 al 4</p><button class="btn-pago">Pay Now</button></div>
+
+        <div class="category-label">Bachata en Pareja</div>
+        <div class="item-clase"><p>Nivel 1 al 4</p><button class="btn-pago">Pay Now</button></div>
+
+        <div class="category-label">Teoría y Musicalidad</div>
+        <div class="item-clase"><p>Módulo Completo</p><button class="btn-pago">Pay Now</button></div>
+
+        <div class="category-label">Bachata Shines</div>
+        <div class="item-clase"><p>Pasos Sueltos 1 al 4</p><button class="btn-pago">Pay Now</button></div>
+
+        <div class="galeria">
+            <div class="foto-card"><img src="WhatsApp Image 2026-04-26 at 7.45.25 PM.jpeg"></div>
+            <div class="foto-card"><img src="IMG_20141012_162154_869.jpg"></div>
         </div>
 
-        <div id="app-catalog"></div>
-
-        <div class="footer-social">
-            <h3 style="font-family: 'Playfair Display'; color: var(--dorado);">Únete a nuestra Comunidad</h3>
-            <div class="social-links">
-                <a href="https://wa.me/542914220136" target="_blank">WhatsApp</a>
-                <a href="https://instagram.com/jacksonbahiaok" target="_blank">Instagram</a>
+        <footer class="footer">
+            <div class="redes">
+                <a href="https://instagram.com/jacksonbahiaok" target="_blank" class="social-btn">
+                    <i class="fab fa-instagram"></i><span>Instagram</span>
+                </a>
+                <a href="https://wa.me/542914220136" target="_blank" class="social-btn">
+                    <i class="fab fa-whatsapp"></i><span>WhatsApp</span>
+                </a>
             </div>
-            <p style="margin-top: 30px; font-size: 0.7rem; opacity: 0.5;">JACKSON BAHÍA CIA • 2026</p>
-        </div>
+            <p style="font-size: 0.7rem; opacity: 0.4;">© 2026 JACKSON BAHÍA CIA - OPTIMA CONFIG</p>
+        </footer>
     </div>
 
-    <div id="vModal" class="modal">
-        <div class="modal-content">
-            <div class="v-cont" id="player"></div>
-            <button onclick="cerrarV()" class="btn btn-red" style="width:100%; border-radius:0; padding: 18px;">CERRAR CLASE</button>
-        </div>
-    </div>
-
-    <script>
-        // DATOS DE CURSOS Y PAGOS
-        const cursos = [
-            { id: 'mus', cat: 'TEORÍA Y MUSICALIDAD', n: 'Entendiendo la Musicalidad', v: 'Masterclass', p: '20.000', vid: 'dQw4w9WgXcQ', pl: false, link: 'https://link.uala.com.ar/mus' },
-            { id: 'b1', cat: 'BACHATA BÁSICOS (Individual)', n: 'Básicos Nivel 1', v: '10 Módulos', p: '20.000', vid: 'PLv8S_P4D8bV4sW9_T0D7S', pl: true, link: 'https://link.uala.com.ar/b1' },
-            // ... agregar todos los niveles detallados en el diseño
-            { id: 'p1', cat: 'BACHATA EN PAREJA', n: 'Nivel Pareja 1', v: '5 Clases Técnicas', p: '25.000', vid: 'ID_PLAYLIST_PAREJA_1', pl: true, link: 'https://link.uala.com.ar/p1' },
-            { id: 's1', cat: 'SHINES (Pasos Sueltos)', n: 'Shines Nivel 1', v: '5 Combinaciones', p: '20.000', vid: 'ID_PLAYLIST_SHINES_1', pl: true, link: 'https://link.uala.com.ar/s1' }
-        ];
-
-        // LÓGICA DE ALMACENAMIENTO DE COMPRAS (Simulada para testeo)
-        let misAccesos = JSON.parse(localStorage.getItem('jackson_compras')) || [];
-
-        function render() {
-            const cont = document.getElementById('app-catalog');
-            cont.innerHTML = '';
-            let currentCat = '';
-
-            cursos.forEach(c => {
-                if(c.cat !== currentCat) {
-                    cont.innerHTML += `<div class="categoria-header">${c.cat}</div>`;
-                    currentCat = c.cat;
-                }
-                const yaCompro = misAccesos.includes(c.id) || misAccesos.includes('VIP');
-                cont.innerHTML += `
-                    <div class="nivel-row">
-                        <div style="text-align: left;">
-                            <h3 style="font-size: 1rem;">${c.n}</h3>
-                            <p style="font-size: 0.8rem; color: #aaa;">${c.v}</p>
-                            <span style="font-size: 0.8rem; color: ${yaCompro ? '#2ecc71' : '#ccc'}">
-                                ${yaCompro ? 'ACTIVO' : '$' + c.p}
-                            </span>
-                        </div>
-                        <button class="btn ${yaCompro ? 'btn-red' : 'btn-gold'}" 
-                                onclick="${yaCompro ? `ver('${c.vid}', ${c.pl})` : `abrirPago('${c.id}', '${c.link}')`}">
-                            ${yaCompro ? 'VER' : 'PAY NOW'}
-                        </button>
-                    </div>`;
-            });
-        }
-
-        // Lógica de Pago
-        function abrirPago(id, link) {
-            // En producción, esto simplemente abre la pasarela de pago.
-            // Aquí simulamos que se abre y que el usuario "compra".
-            if(confirm("Se abrirá Ualá para pagar. ¿Deseas simular que compras este curso?")) {
-                window.open(link, '_blank');
-                // Simulación: Guardamos la compra en local storage.
-                misAccesos.push(id);
-                localStorage.setItem('jackson_compras', JSON.stringify(misAccesos));
-                render();
-            }
-        }
-
-        // Lógica de Reproductor de Video
-        function ver(id, esLista) {
-            const url = esLista ? `https://www.youtube.com/embed?listType=playlist&list=${id}&autoplay=1` : `https://www.youtube.com/embed/${id}?autoplay=1`;
-            document.getElementById('player').innerHTML = `<iframe src="${url}" allowfullscreen allow="autoplay"></iframe>`;
-            document.getElementById('vModal').style.display = 'flex';
-        }
-
-        function cerrarV() { document.getElementById('vModal').style.display = 'none'; document.getElementById('player').innerHTML = ''; }
-
-        render();
-    </script>
 </body>
 </html>
