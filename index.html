@@ -14,12 +14,9 @@ body{
 margin:0;
 font-family:Poppins;
 color:white;
-
-/* FONDO NUEVO CON BAILARINES */
 background:
 linear-gradient(rgba(10,10,15,0.85), rgba(10,10,15,0.95)),
 url('https://images.unsplash.com/photo-1514512364185-4c2bff2d8c52?auto=format&fit=crop&w=1600&q=80');
-
 background-size:cover;
 background-position:center;
 background-attachment:fixed;
@@ -32,7 +29,6 @@ height:100%;
 z-index:-1;
 }
 
-/* CAPA EXTRA ANIMADA */
 .dance-bg{
 position:fixed;
 width:100%;
@@ -48,6 +44,19 @@ animation:zoom 20s infinite alternate;
 @keyframes zoom{
 from{transform:scale(1);}
 to{transform:scale(1.1);}
+}
+
+/* LOGO */
+.logo{
+position:fixed;
+top:20px;
+left:20px;
+font-size:32px;
+font-weight:900;
+background:linear-gradient(45deg,#ff00cc,#3333ff);
+-webkit-background-clip:text;
+color:transparent;
+z-index:1000;
 }
 
 /* HERO */
@@ -75,13 +84,17 @@ to{text-shadow:0 0 50px #3333ff;}
 }
 
 .hero h2{
-font-size:18px;
-font-weight:300;
-opacity:0.8;
+font-size:30px;
+font-weight:600;
+opacity:0.9;
 margin-bottom:20px;
 }
 
 /* LOGIN */
+#loginBox{
+display:block;
+}
+
 input{
 padding:10px;
 margin:5px;
@@ -150,18 +163,20 @@ margin:20px;
 
 <body>
 
-<!-- NUEVA CAPA DE FONDO -->
+<div class="logo">JB</div>
 <div class="dance-bg"></div>
-
 <div id="particles-js"></div>
 
 <div class="hero">
 <h1>JACKSON BAHIA CIA</h1>
-<h2>Bienvenidos - Clases de bachata online para todo público</h2>
+<h2>Clases de bachata online para todo público</h2>
 
+<div id="loginBox">
 <input id="user" placeholder="Email">
 <input id="pass" type="password" placeholder="Contraseña">
 <button class="btn" onclick="login()">Ingresar</button>
+</div>
+
 </div>
 
 <div class="section">
@@ -169,47 +184,23 @@ margin:20px;
 <div class="curso">
 <h2>BACHATA PASOS BÁSICOS</h2>
 
-<div class="nivel">Nivel 1 <button class="btn" onclick="invertir('Basico 1')">Invertir</button></div>
-<div class="nivel">Nivel 2 <button class="btn" onclick="invertir('Basico 2')">Invertir</button></div>
-<div class="nivel">Nivel 3 <button class="btn" onclick="invertir('Basico 3')">Invertir</button></div>
-<div class="nivel">Nivel 4 <button class="btn" onclick="invertir('Basico 4')">Invertir</button></div>
-
-<div class="nivel">Membresía Completa (requiere nivel 1-4) $20.000 
-<button class="btn" onclick="invertir('Membresia Basico')">Invertir</button></div>
-</div>
-
-<div class="curso">
-<h2>BACHATA PAREJA</h2>
-
-<div class="nivel">Nivel 1 <button class="btn" onclick="invertir('Pareja 1')">Invertir</button></div>
-<div class="nivel">Nivel 2 <button class="btn" onclick="invertir('Pareja 2')">Invertir</button></div>
-<div class="nivel">Nivel 3 <button class="btn" onclick="invertir('Pareja 3')">Invertir</button></div>
-<div class="nivel">Nivel 4 <button class="btn" onclick="invertir('Pareja 4')">Invertir</button></div>
+<div class="nivel">Nivel 1 <button class="btn" onclick="invertir()">Invertir</button></div>
+<div class="nivel">Nivel 2 <button class="btn" onclick="invertir()">Invertir</button></div>
+<div class="nivel">Nivel 3 <button class="btn" onclick="invertir()">Invertir</button></div>
+<div class="nivel">Nivel 4 <button class="btn" onclick="invertir()">Invertir</button></div>
 
 <div class="nivel">Membresía Completa $20.000 
-<button class="btn" onclick="invertir('Membresia Pareja')">Invertir</button></div>
-</div>
-
-<div class="curso">
-<h2>SHINES</h2>
-
-<div class="nivel">Nivel 1 <button class="btn" onclick="invertir('Shine 1')">Invertir</button></div>
-<div class="nivel">Nivel 2 <button class="btn" onclick="invertir('Shine 2')">Invertir</button></div>
-<div class="nivel">Nivel 3 <button class="btn" onclick="invertir('Shine 3')">Invertir</button></div>
-<div class="nivel">Nivel 4 <button class="btn" onclick="invertir('Shine 4')">Invertir</button></div>
-
-<div class="nivel">Membresía Completa $20.000 
-<button class="btn" onclick="invertir('Membresia Shine')">Invertir</button></div>
+<button class="btn" onclick="invertir()">Invertir</button></div>
 </div>
 
 </div>
 
 <div id="modal" class="modal">
 <div class="modal-content">
-<h3>Bienvenido</h3>
+<h3>Panel de Pago</h3>
 <p>
-Alias: JACKSON.BAHIA<br>
-Titular: Diego Antonio Pimentel<br><br>
+<b>Titular:</b> PIMENTEL DIEGO ANTONIO<br>
+<b>Alias:</b> JACKSON.BAHIA<br><br>
 Enviar comprobante a:<br>
 <b>2914220136</b>
 </p>
@@ -224,21 +215,24 @@ Enviar comprobante a:<br>
 
 <script>
 
+// LOGIN
 function login(){
 let u=document.getElementById("user").value;
 let p=document.getElementById("pass").value;
 
 if(u==="admin@jackson.com" && p==="2828"){
 localStorage.setItem("admin","true");
-alert("Admin conectado");
 mostrarAdmin();
 }else{
 localStorage.setItem("usuario",u);
-alert("Usuario logueado");
-}
 }
 
-function invertir(curso){
+// OCULTAR LOGIN
+document.getElementById("loginBox").style.display="none";
+}
+
+// INVERTIR
+function invertir(){
 let user=localStorage.getItem("usuario") || localStorage.getItem("admin");
 
 if(!user){
@@ -246,40 +240,22 @@ alert("Debes iniciar sesión primero");
 return;
 }
 
-let pendientes=JSON.parse(localStorage.getItem("pendientes")||"[]");
-pendientes.push(curso);
-localStorage.setItem("pendientes",JSON.stringify(pendientes));
-
 document.getElementById("modal").style.display="flex";
-cargarAdmin();
 }
 
+// CERRAR MODAL
 function cerrar(){
 document.getElementById("modal").style.display="none";
 }
 
+// ADMIN
 function mostrarAdmin(){
 document.getElementById("adminPanel").style.display="block";
-cargarAdmin();
-}
-
-function cargarAdmin(){
-let lista=document.getElementById("lista");
-lista.innerHTML="";
-
-let datos=JSON.parse(localStorage.getItem("pendientes")||"[]");
-
-datos.forEach(d=>{
-let li=document.createElement("li");
-li.textContent=d;
-lista.appendChild(li);
-});
 }
 
 particlesJS("particles-js",{
 particles:{number:{value:60},size:{value:3},move:{speed:2}}
 });
-
 </script>
 
 </body>
