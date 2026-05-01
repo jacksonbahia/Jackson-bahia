@@ -1,314 +1,276 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jackson Bahía Cia | Academia de Bachata Online</title>
-    
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
-    <script src="https://unpkg.com/lucide@latest"></script>
-    
-    <style>
-        :root {
-            --dorado: #D4AF37;
-            --dorado-bright: #f1d56e;
-            --rojo: #C8102E;
-            --oscuro: #050505;
-            --glass: rgba(255, 255, 255, 0.05);
-            --glass-border: rgba(255, 255, 255, 0.1);
-            --exito: #2ecc71;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jackson Bahia Cia</title>
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        
-        body {
-            background-color: var(--oscuro);
-            color: white;
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            overflow-x: hidden;
-            scroll-behavior: smooth;
-        }
+<!-- SEO -->
+<meta name="description" content="Clases de bachata online - Jackson Bahia Cia">
 
-        /* --- FONDO DINÁMICO CON TU FOTO --- */
-        #particles-js {
-            position: fixed;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.9)), url('jack.jpeg');
-            background-size: cover;
-            background-position: center top;
-            background-attachment: fixed;
-        }
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet">
 
-        /* --- NAVIGATION --- */
-        nav {
-            position: fixed;
-            top: 0; width: 100%;
-            padding: 20px 5%;
-            display: flex; justify-content: space-between; align-items: center;
-            background: rgba(0,0,0,0.8);
-            backdrop-filter: blur(10px);
-            z-index: 1000;
-            border-bottom: 1px solid var(--glass-border);
-        }
+<!-- Particles -->
+<script src="https://cdn.jsdelivr.net/npm/particles.js"></script>
 
-        .nav-logo { font-family: 'Playfair Display'; color: var(--dorado); font-size: 1.5rem; }
-        .nav-auth button {
-            background: none; border: 1px solid var(--dorado); color: white;
-            padding: 8px 20px; border-radius: 50px; cursor: pointer; transition: 0.3s;
-        }
-        .nav-auth button:hover { background: var(--dorado); color: black; }
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
+body{background:#0a0a0f;color:white;overflow-x:hidden;}
 
-        /* --- HERO SECTION --- */
-        .hero {
-            height: 100vh;
-            display: flex; flex-direction: column; justify-content: center; align-items: center;
-            text-align: center; padding: 0 20px;
-        }
+#particles-js{
+position:fixed;
+width:100%;
+height:100%;
+z-index:-1;
+}
 
-        .hero-logo {
-            width: 180px; height: 180px;
-            border-radius: 50%;
-            margin-bottom: 20px;
-            box-shadow: 0 0 50px rgba(212, 175, 55, 0.4);
-            border: 2px solid var(--dorado);
-            animation: pulse 4s infinite;
-        }
+/* NAV */
+nav{
+position:fixed;
+width:100%;
+top:0;
+background:rgba(0,0,0,0.6);
+backdrop-filter:blur(10px);
+display:flex;
+justify-content:space-between;
+padding:15px 40px;
+z-index:1000;
+}
 
-        h1 {
-            font-family: 'Playfair Display';
-            font-size: clamp(3rem, 8vw, 5rem);
-            text-transform: uppercase;
-            line-height: 1;
-            margin-bottom: 10px;
-            background: linear-gradient(to bottom, #fff, var(--dorado));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            filter: drop-shadow(0 0 15px rgba(212,175,55,0.5));
-        }
+nav a{
+color:white;
+text-decoration:none;
+margin:0 10px;
+}
 
-        .subtitle {
-            font-size: 1.2rem; letter-spacing: 8px; color: var(--dorado);
-            font-weight: 800; margin-bottom: 30px;
-        }
+/* HERO */
+.hero{
+height:100vh;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+text-align:center;
+}
 
-        /* --- GRID DE CURSOS --- */
-        .container { max-width: 1200px; margin: 0 auto; padding: 100px 20px; }
-        
-        .section-title {
-            font-family: 'Playfair Display';
-            font-size: 2.5rem; margin-bottom: 50px;
-            border-left: 5px solid var(--dorado); padding-left: 20px;
-        }
+.hero h1{
+font-size:60px;
+background:linear-gradient(45deg,#ff00cc,#3333ff);
+-webkit-background-clip:text;
+color:transparent;
+animation:glow 2s infinite alternate;
+}
 
-        .course-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
-        }
+@keyframes glow{
+from{text-shadow:0 0 10px #ff00cc;}
+to{text-shadow:0 0 30px #3333ff;}
+}
 
-        .course-card {
-            background: var(--glass);
-            backdrop-filter: blur(10px);
-            border: 1px solid var(--glass-border);
-            border-radius: 24px;
-            padding: 30px;
-            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
+.btn{
+padding:12px 25px;
+background:linear-gradient(45deg,#ff00cc,#3333ff);
+border:none;
+color:white;
+cursor:pointer;
+border-radius:30px;
+transition:0.3s;
+margin-top:20px;
+}
 
-        .course-card h3 { color: var(--dorado); margin-bottom: 15px; font-size: 1.4rem; }
-        
-        .level-item {
-            display: flex; justify-content: space-between; align-items: center;
-            padding: 15px 0; border-bottom: 1px solid var(--glass-border);
-        }
+.btn:hover{
+transform:scale(1.1);
+}
 
-        .btn-pay {
-            background: var(--dorado); color: black; border: none;
-            padding: 10px 20px; border-radius: 10px; font-weight: 800;
-            cursor: pointer; text-transform: uppercase; transition: 0.3s; font-size: 0.7rem;
-        }
+/* SECTIONS */
+.section{
+padding:100px 20px;
+max-width:1100px;
+margin:auto;
+}
 
-        .btn-pay:hover { background: white; transform: scale(1.05); }
-        
-        .btn-view { background: var(--exito); color: white; }
-        .btn-expired { background: var(--rojo); color: white; }
+.cards{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:20px;
+}
 
-        .time-badge {
-            display: block; font-size: 0.65rem; color: var(--exito); margin-top: 4px; text-align: right;
-        }
+.card{
+background:rgba(255,255,255,0.05);
+padding:20px;
+border-radius:15px;
+transition:0.3s;
+}
 
-        /* --- MODAL --- */
-        .modal {
-            position: fixed; inset: 0; background: rgba(0,0,0,0.9);
-            display: none; justify-content: center; align-items: center; z-index: 2000;
-        }
-        .modal-content {
-            background: #111; padding: 40px; border-radius: 20px;
-            max-width: 450px; width: 90%; text-align: center; border: 1px solid var(--dorado);
-        }
+.card:hover{
+transform:translateY(-10px);
+}
 
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); box-shadow: 0 0 30px rgba(212, 175, 55, 0.3); }
-            50% { transform: scale(1.05); box-shadow: 0 0 60px rgba(212, 175, 55, 0.6); }
-        }
+/* MODAL */
+.modal{
+position:fixed;
+top:0;left:0;
+width:100%;height:100%;
+background:rgba(0,0,0,0.8);
+display:none;
+justify-content:center;
+align-items:center;
+}
 
-        footer { padding: 60px 5%; text-align: center; border-top: 1px solid var(--glass-border); }
-    </style>
+.modal-content{
+background:#111;
+padding:30px;
+border-radius:10px;
+text-align:center;
+}
+
+/* FOOTER */
+footer{
+text-align:center;
+padding:40px;
+background:#111;
+}
+
+footer a{
+margin:10px;
+color:white;
+text-decoration:none;
+}
+</style>
 </head>
+
 <body>
 
-    <div id="particles-js"></div>
+<div id="particles-js"></div>
 
-    <nav>
-        <div class="nav-logo">JACKSON BAHÍA</div>
-        <div class="nav-auth" id="userArea">
-            <button onclick="toggleLogin()">Ingresar / Registrarse</button>
-        </div>
-    </nav>
+<nav>
+<div>Jackson Bahia</div>
+<div>
+<a href="#cursos">Cursos</a>
+<a href="#videos">Videos</a>
+<a href="#login">Login</a>
+</div>
+</nav>
 
-    <section class="hero">
-        <img src="LOGO Jackson Bahia oficial.jpg" class="hero-logo" alt="Logo">
-        <h1>Jackson Bahía Cia</h1>
-        <p class="subtitle">CLASES DE BACHATA ONLINE</p>
-        <button class="btn-pay" style="padding: 15px 40px;" onclick="document.getElementById('cursos').scrollIntoView()">Explorar Niveles</button>
-    </section>
+<section class="hero">
+<h1>Jackson Bahia Cia</h1>
+<p>CLASES DE BACHATA ONLINE</p>
+<button class="btn" onclick="scrollToCursos()">Ver Clases</button>
+</section>
 
-    <div class="container" id="cursos">
-        <h2 class="section-title">Programas de Formación</h2>
-        <div class="course-grid" id="courseContainer"></div>
-    </div>
+<section id="cursos" class="section">
+<h2>Cursos</h2>
 
-    <div class="modal" id="modal">
-        <div class="modal-content">
-            <i data-lucide="play-circle" style="color: var(--dorado); width: 50px; height: 50px; margin-bottom: 15px;"></i>
-            <h2 id="modalTitle">Confirmar Inscripción</h2>
-            <p id="modalText" style="margin: 20px 0; color: #aaa;">Al confirmar, tendrás acceso total al contenido por los próximos 30 días.</p>
-            <div id="modalActions">
-                 <button class="btn-pay" onclick="confirmarCompra()">Confirmar Pago</button>
-                 <button onclick="cerrarModal()" style="background:none; border:none; color:white; margin-left:15px; cursor:pointer; font-size:0.8rem;">Cerrar</button>
-            </div>
-        </div>
-    </div>
+<div class="cards">
 
-    <footer>
-        <div style="margin-bottom: 20px; display: flex; justify-content: center; gap: 20px;">
-            <a href="https://instagram.com/jacksonbahiaok" target="_blank" style="color:white;"><i data-lucide="instagram"></i></a>
-            <a href="https://wa.me/542914220136" target="_blank" style="color:white;"><i data-lucide="message-circle"></i></a>
-        </div>
-        <p>© 2026 Jackson Bahía Cia - Todos los derechos reservados</p>
-    </footer>
+<div class="card">
+<h3>Básicos</h3>
+<button class="btn" onclick="comprar('Basico 1')">Nivel 1</button>
+<button class="btn" onclick="comprar('Basico 2')">Nivel 2</button>
+<button class="btn" onclick="comprar('Basico 3')">Nivel 3</button>
+<button class="btn" onclick="comprar('Basico 4')">Nivel 4</button>
+</div>
 
-    <script>
-        const DURACION_ACCESO = 30 * 24 * 60 * 60 * 1000; // 30 días
-        
-        // --- BASE DE DATOS DE CURSOS ---
-        // He agregado el link que enviaste al id 'b-1'
-        const cursosData = [
-            { id: 'b', cat: 'Bachata Básicos', niveles: [1, 2, 3, 4], links: { '1': 'https://youtu.be/8Ne_yfRQfEA' } },
-            { id: 'p', cat: 'Bachata en Pareja', niveles: [1, 2, 3, 4], links: {} },
-            { id: 's', cat: 'Shines (Pasos Sueltos)', niveles: [1, 2, 3, 4], links: {} },
-            { id: 'm', cat: 'Comprensión Musical', niveles: ['Único'], links: { 'Único': '#' } }
-        ];
+<div class="card">
+<h3>Pareja</h3>
+<button class="btn" onclick="comprar('Pareja 1')">Nivel 1</button>
+<button class="btn" onclick="comprar('Pareja 2')">Nivel 2</button>
+<button class="btn" onclick="comprar('Pareja 3')">Nivel 3</button>
+<button class="btn" onclick="comprar('Pareja 4')">Nivel 4</button>
+</div>
 
-        let userState = JSON.parse(localStorage.getItem('jb_user')) || { logged: false, courses: {} };
-        let selectedProduct = null;
+<div class="card">
+<h3>Shines</h3>
+<button class="btn" onclick="comprar('Shine 1')">Nivel 1</button>
+<button class="btn" onclick="comprar('Shine 2')">Nivel 2</button>
+<button class="btn" onclick="comprar('Shine 3')">Nivel 3</button>
+<button class="btn" onclick="comprar('Shine 4')">Nivel 4</button>
+</div>
 
-        function renderCursos() {
-            const container = document.getElementById('courseContainer');
-            const ahora = Date.now();
+<div class="card">
+<h3>Musicalidad</h3>
+<button class="btn" onclick="comprar('Musicalidad')">Comprar</button>
+</div>
 
-            container.innerHTML = cursosData.map(curso => `
-                <div class="course-card">
-                    <h3>${curso.cat}</h3>
-                    <div class="level-list">
-                        ${curso.niveles.map(lvl => {
-                            const prodId = `${curso.id}-${lvl}`;
-                            const dataCompra = userState.courses[prodId];
-                            const videoUrl = curso.links[lvl] || '#';
-                            
-                            let btnHtml = '';
-                            if (dataCompra) {
-                                const tiempoTranscurrido = ahora - dataCompra.fecha;
-                                if (tiempoTranscurrido < DURACION_ACCESO) {
-                                    const diasFaltan = Math.ceil((DURACION_ACCESO - tiempoTranscurrido) / (1000 * 60 * 60 * 24));
-                                    btnHtml = `
-                                        <div>
-                                            <button class="btn-pay btn-view" onclick="window.open('${videoUrl}', '_blank')">ACCEDER AHORA</button>
-                                            <span class="time-badge">Quedan ${diasFaltan} días</span>
-                                        </div>`;
-                                } else {
-                                    btnHtml = `<button class="btn-pay btn-expired" onclick="intentarCompra('${prodId}')">ACCESO EXPIRADO</button>`;
-                                }
-                            } else {
-                                btnHtml = `<button class="btn-pay" onclick="intentarCompra('${prodId}')">PAGAR</button>`;
-                            }
+</div>
+</section>
 
-                            return `
-                                <div class="level-item">
-                                    <span>Nivel ${lvl}</span>
-                                    ${btnHtml}
-                                </div>`;
-                        }).join('')}
-                    </div>
-                </div>
-            `).join('');
-            
-            updateUserNav();
-        }
+<section id="videos" class="section">
+<h2>Mis Cursos</h2>
+<ul id="misCursos"></ul>
+</section>
 
-        function updateUserNav() {
-            const userArea = document.getElementById('userArea');
-            if(userState.logged) {
-                userArea.innerHTML = `<span>Hola Alumno!</span> | <button onclick="logout()" style="background:none; border:none; color:var(--dorado); cursor:pointer; margin-left:10px; font-weight:bold;">Salir</button>`;
-            }
-        }
+<section id="login" class="section">
+<h2>Login</h2>
+<input type="text" id="user" placeholder="Usuario"><br><br>
+<input type="password" id="pass" placeholder="Contraseña"><br><br>
+<button class="btn" onclick="login()">Entrar</button>
+</section>
 
-        function toggleLogin() {
-            userState.logged = true;
-            saveState();
-            renderCursos();
-            alert("Has ingresado a la plataforma.");
-        }
+<div id="modal" class="modal">
+<div class="modal-content">
+<h2>Compra realizada</h2>
+<button class="btn" onclick="cerrarModal()">Cerrar</button>
+</div>
+</div>
 
-        function logout() {
-            userState.logged = false;
-            saveState();
-            location.reload();
-        }
+<footer>
+<p>Redes:</p>
+<a href="#">Instagram</a>
+<a href="#">Facebook</a>
+<a href="#">YouTube</a>
+<a href="#">WhatsApp</a>
+</footer>
 
-        function intentarCompra(id) {
-            if(!userState.logged) { alert("Inicia sesión para poder adquirir niveles."); return; }
-            selectedProduct = id;
-            document.getElementById('modal').style.display = 'flex';
-        }
+<script>
+// SCROLL
+function scrollToCursos(){
+document.getElementById("cursos").scrollIntoView({behavior:'smooth'});
+}
 
-        function confirmarCompra() {
-            userState.courses[selectedProduct] = { fecha: Date.now() };
-            saveState();
-            cerrarModal();
-            renderCursos();
-        }
+// LOGIN
+function login(){
+let user=document.getElementById("user").value;
+localStorage.setItem("user",user);
+alert("Bienvenido "+user);
+}
 
-        function cerrarModal() { document.getElementById('modal').style.display = 'none'; }
+// COMPRAR
+function comprar(curso){
+let cursos=JSON.parse(localStorage.getItem("cursos")||"[]");
+cursos.push(curso);
+localStorage.setItem("cursos",JSON.stringify(cursos));
+document.getElementById("modal").style.display="flex";
+mostrarCursos();
+}
 
-        function saveState() { localStorage.setItem('jb_user', JSON.stringify(userState)); }
+function cerrarModal(){
+document.getElementById("modal").style.display="none";
+}
 
-        // Inicialización
-        lucide.createIcons();
-        renderCursos();
+function mostrarCursos(){
+let lista=document.getElementById("misCursos");
+lista.innerHTML="";
+let cursos=JSON.parse(localStorage.getItem("cursos")||"[]");
+cursos.forEach(c=>{
+let li=document.createElement("li");
+li.textContent=c;
+lista.appendChild(li);
+});
+}
 
-        particlesJS('particles-js', {
-            "particles": {
-                "number": { "value": 110 },
-                "color": { "value": "#D4AF37" },
-                "size": { "value": 2.5, "random": true },
-                "move": { "enable": true, "speed": 1.5, "direction": "top" },
-                "opacity": { "value": 0.4, "random": true }
-            }
-        });
-    </script>
+mostrarCursos();
+
+// PARTICLES
+particlesJS("particles-js",{
+particles:{
+number:{value:60},
+size:{value:3},
+move:{speed:2},
+line_linked:{enable:true}
+}
+});
+</script>
+
 </body>
 </html>
