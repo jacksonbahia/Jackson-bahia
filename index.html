@@ -3,10 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Jackson Bahia Cia</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600;900&display=swap" rel="stylesheet">
 
 <style>
 
@@ -14,108 +13,90 @@ body{
 margin:0;
 font-family:Poppins;
 color:white;
+overflow-x:hidden;
+}
+
+/* 🔥 FONDO BACHATA */
+.background{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
 background:
-linear-gradient(rgba(10,10,15,0.9), rgba(10,10,15,0.95)),
-url('https://images.unsplash.com/photo-1514512364185-4c2bff2d8c52?auto=format&fit=crop&w=1600&q=80');
+linear-gradient(rgba(0,0,0,0.75), rgba(0,0,0,0.85)),
+url('https://images.unsplash.com/photo-1521336575822-6da63fb45455?auto=format&fit=crop&w=1600&q=80');
 background-size:cover;
 background-position:center;
+z-index:-1;
 }
 
-/* NAV */
-.logo{
-position:fixed;
-top:20px;
-left:30px;
-font-size:26px;
-font-weight:700;
-letter-spacing:2px;
-}
-
-/* HERO */
-.hero{
-height:100vh;
-display:flex;
-flex-direction:column;
-justify-content:center;
-align-items:center;
+/* LOGO / TITULO */
+.header{
 text-align:center;
-padding:20px;
+padding-top:80px;
 }
 
-.hero h1{
-font-size:80px;
+.header h1{
+font-size:70px;
 font-weight:900;
-letter-spacing:4px;
+letter-spacing:3px;
+background:linear-gradient(45deg,#ff00cc,#00ccff,#ffcc00);
+-webkit-background-clip:text;
+color:transparent;
+text-shadow:0 0 20px rgba(255,255,255,0.3);
+animation:glow 2s infinite alternate;
 }
 
-.hero h2{
-font-size:24px;
-font-weight:300;
-margin-top:10px;
-opacity:0.8;
+@keyframes glow{
+from{filter:drop-shadow(0 0 10px #ff00cc);}
+to{filter:drop-shadow(0 0 30px #00ccff);}
 }
 
 /* LOGIN */
 #loginBox{
-margin-top:30px;
+margin-top:20px;
 }
 
 input{
-padding:12px;
+padding:10px;
 margin:5px;
-border-radius:30px;
+border-radius:8px;
 border:none;
-width:180px;
 }
 
-.btn{
-background:white;
-color:black;
+button{
+padding:10px 15px;
 border:none;
-padding:10px 20px;
-border-radius:30px;
+border-radius:20px;
 cursor:pointer;
-font-weight:600;
-transition:0.3s;
-}
-
-.btn:hover{
 background:#ff00cc;
 color:white;
 }
 
-/* SECCION */
+/* SECCIONES */
 .section{
-max-width:1000px;
+max-width:900px;
 margin:auto;
-padding:60px 20px;
+padding:40px;
 }
 
-/* TARJETAS */
 .curso{
-margin-bottom:60px;
+margin-bottom:40px;
 }
 
 .curso h2{
-margin-bottom:15px;
-font-weight:600;
-letter-spacing:1px;
+font-size:22px;
+margin-bottom:10px;
 }
 
 .nivel{
 display:flex;
 justify-content:space-between;
-align-items:center;
 background:rgba(255,255,255,0.05);
-padding:15px;
-margin:10px 0;
-border-radius:12px;
-backdrop-filter:blur(5px);
-transition:0.3s;
-}
-
-.nivel:hover{
-background:rgba(255,255,255,0.1);
+padding:12px;
+margin:6px 0;
+border-radius:10px;
 }
 
 /* MODAL */
@@ -126,35 +107,31 @@ top:0;
 left:0;
 width:100%;
 height:100%;
-background:rgba(0,0,0,0.95);
+background:rgba(0,0,0,0.9);
 justify-content:center;
 align-items:center;
 }
 
 .modal-content{
 background:#111;
-padding:30px;
-border-radius:15px;
+padding:25px;
+border-radius:12px;
 text-align:center;
 max-width:400px;
 }
 
-/* FOOTER */
-footer{
-text-align:center;
-padding:30px;
-border-top:1px solid rgba(255,255,255,0.1);
+/* ADMIN */
+#adminPanel{
+display:none;
+background:#111;
+padding:20px;
+margin:20px;
+border-radius:10px;
 }
 
-footer a{
-color:white;
-margin:10px;
-text-decoration:none;
-opacity:0.7;
-}
-
-footer a:hover{
-opacity:1;
+textarea{
+width:100%;
+margin:5px 0;
 }
 
 </style>
@@ -162,99 +139,111 @@ opacity:1;
 
 <body>
 
-<div class="logo">JB</div>
+<div class="background"></div>
 
-<div class="hero">
+<div class="header">
 <h1>JACKSON BAHIA CIA</h1>
-<h2>Clases de bachata online para todo público</h2>
 
 <div id="loginBox">
-<input id="user" placeholder="Email">
+<input id="user" placeholder="Usuario">
 <input id="pass" type="password" placeholder="Contraseña">
-<button class="btn" onclick="login()">Ingresar</button>
+<button onclick="login()">Ingresar</button>
 </div>
 </div>
 
+<!-- CURSOS -->
 <div class="section">
 
 <div class="curso">
-<h2>BÁSICOS</h2>
-<div class="nivel">Nivel 1 <button class="btn" onclick="invertir()">Invertir</button></div>
-<div class="nivel">Nivel 2 <button class="btn" onclick="invertir()">Invertir</button></div>
-<div class="nivel">Nivel 3 <button class="btn" onclick="invertir()">Invertir</button></div>
-<div class="nivel">Nivel 4 <button class="btn" onclick="invertir()">Invertir</button></div>
+<h2>BACHATA BÁSICOS NIVEL 1</h2>
+<div class="nivel">Nivel 1 <button onclick="invertir()">Invertir</button></div>
+<div class="nivel">Nivel 2 <button onclick="invertir()">Invertir</button></div>
 </div>
 
 <div class="curso">
-<h2>PAREJA</h2>
-<div class="nivel">Nivel 1 <button class="btn" onclick="invertir()">Invertir</button></div>
-<div class="nivel">Nivel 2 <button class="btn" onclick="invertir()">Invertir</button></div>
-<div class="nivel">Nivel 3 <button class="btn" onclick="invertir()">Invertir</button></div>
-<div class="nivel">Nivel 4 <button class="btn" onclick="invertir()">Invertir</button></div>
+<h2>BACHATA EN PAREJA NIVEL 1</h2>
+<div class="nivel">Nivel 1 <button onclick="invertir()">Invertir</button></div>
+<div class="nivel">Nivel 2 <button onclick="invertir()">Invertir</button></div>
 </div>
 
 <div class="curso">
-<h2>SHINES</h2>
-<div class="nivel">Nivel 1 <button class="btn" onclick="invertir()">Invertir</button></div>
-<div class="nivel">Nivel 2 <button class="btn" onclick="invertir()">Invertir</button></div>
-<div class="nivel">Nivel 3 <button class="btn" onclick="invertir()">Invertir</button></div>
-<div class="nivel">Nivel 4 <button class="btn" onclick="invertir()">Invertir</button></div>
+<h2>BACHATA SHINES NIVEL 1</h2>
+<div class="nivel">Nivel 1 <button onclick="invertir()">Invertir</button></div>
+<div class="nivel">Nivel 2 <button onclick="invertir()">Invertir</button></div>
 </div>
 
 </div>
 
-<!-- MODAL -->
+<!-- MODAL PAGO -->
 <div id="modal" class="modal">
 <div class="modal-content">
-<h3>Panel de Pago</h3>
+<h3>Información de Pago</h3>
 <p>
 Titular: PIMENTEL DIEGO ANTONIO<br>
-Alias: JACKSON.BAHIA<br><br>
-Enviar comprobante a:<br>
-<b>2914220136</b>
+Alias: JACKSON.BAHIA<br>
+Enviar comprobante al: 2914220136
 </p>
-<button class="btn" onclick="cerrar()">Cerrar</button>
+<button onclick="cerrar()">Cerrar</button>
 </div>
 </div>
 
-<footer>
-<a href="#">Instagram</a>
-<a href="https://wa.me/542914220136">WhatsApp</a>
-</footer>
+<!-- ADMIN -->
+<div id="adminPanel">
+<h3>Panel Admin - Descripciones</h3>
+
+<div>
+Básicos Nivel 1
+<textarea onchange="save('basico1',this.value)"></textarea>
+</div>
+
+<div>
+Pareja Nivel 1
+<textarea onchange="save('pareja1',this.value)"></textarea>
+</div>
+
+<div>
+Shines Nivel 1
+<textarea onchange="save('shine1',this.value)"></textarea>
+</div>
+
+</div>
 
 <script>
 
-window.onload=function(){
-if(localStorage.getItem("usuario")){
-document.getElementById("loginBox").style.display="none";
-}
-}
-
+// LOGIN (OCULTA CUADRO)
 function login(){
 let u=document.getElementById("user").value;
 
-if(u===""){
-alert("Ingresá un usuario");
-return;
+if(u==="admin@jackson.com"){
+document.getElementById("adminPanel").style.display="block";
 }
 
-localStorage.setItem("usuario",u);
+localStorage.setItem("user",u);
+
+// OCULTA LOGIN
 document.getElementById("loginBox").style.display="none";
 }
 
+// INVERTIR
 function invertir(){
-let user=localStorage.getItem("usuario");
+let user=localStorage.getItem("user");
 
 if(!user){
-alert("Primero iniciá sesión");
+alert("Debes iniciar sesión");
 return;
 }
 
 document.getElementById("modal").style.display="flex";
 }
 
+// CERRAR MODAL
 function cerrar(){
 document.getElementById("modal").style.display="none";
+}
+
+// GUARDAR DESCRIPCIONES
+function save(key,value){
+localStorage.setItem(key,value);
 }
 
 </script>
