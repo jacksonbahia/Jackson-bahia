@@ -3,110 +3,120 @@
 <head>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Jackson Bahía Cia - CLASES DE BACHATA ONLINE</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet"/>
+    <title>Jackson Bahía Cia - CLASES DE BACHATA Online</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Plus+Jakarta+Sans:wght@400;600;700&display=swap" rel="stylesheet"/>
     <style>
         :root { 
             --dorado: #D4AF37; 
             --rojo: #C8102E; 
-            --oscuro: #070707;
-            --glass: rgba(255, 255, 255, 0.07);
-            --shadow: 0 20px 40px rgba(0, 0, 0, 0.9);
+            --oscuro: #0a0a0a;
+            --glass: rgba(255, 255, 255, 0.06);
+            --sombra: 0 15px 35px rgba(0,0,0,0.7);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
         
-        body { 
-            background-color: var(--oscuro); 
-            color: white; 
-            overflow-x: hidden;
-            line-height: 1.6;
-        }
+        body { background-color: var(--oscuro); color: white; overflow-x: hidden; min-height: 100vh; }
 
-        /* FONDO DINÁMICO CON TU FOTO */
+        /* FONDO DINÁMICO (Efecto de zoom suave continuo) */
         .bg-dinamico {
             position: fixed; inset: 0;
-            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.9)), url('jack.jpeg');
+            background: linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.9)), url('jack.jpeg');
             background-size: cover; background-position: center top;
-            z-index: -2;
-            animation: panBg 20s infinite alternate;
+            z-index: -1;
+            animation: backgroundMove 20s ease-in-out infinite alternate;
         }
 
-        @keyframes panBg {
-            from { transform: scale(1); }
-            to { transform: scale(1.1); }
+        @keyframes backgroundMove {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.08); }
         }
 
-        .container { max-width: 650px; margin: 0 auto; padding: 50px 20px; position: relative; }
+        .container { max-width: 650px; margin: 0 auto; padding: 40px 20px; text-align: center; }
 
-        /* IDENTIDAD VISUAL */
-        .brand-box { text-align: center; margin-bottom: 50px; }
-        .logo-dynamic { 
-            width: 170px; 
-            filter: drop-shadow(0 0 20px rgba(212,175,55,0.3));
-            margin-bottom: 20px;
-            animation: pulseLogo 4s infinite ease-in-out;
+        /* HEADER */
+        .logo { 
+            width: 155px; 
+            filter: drop-shadow(0 0 15px rgba(212,175,55,0.3));
+            transition: transform 0.5s ease;
+            margin-bottom: 15px;
         }
+        .logo:hover { transform: scale(1.08) rotate(3deg); }
 
-        @keyframes pulseLogo {
-            0%, 100% { transform: scale(1); opacity: 1; }
-            50% { transform: scale(1.05); opacity: 0.8; }
+        h1 { font-family: 'Playfair Display'; font-size: 2.6rem; text-transform: uppercase; letter-spacing: 1px; text-shadow: 2px 4px 10px rgba(0,0,0,0.8); }
+        .sub-titulo { color: var(--dorado); font-weight: 700; letter-spacing: 4px; font-size: 1rem; margin-top: 5px; margin-bottom: 40px; text-shadow: 1px 2px 4px rgba(0,0,0,0.8); }
+
+        /* MEMBRESÍA VIP */
+        .vip-card {
+            background: linear-gradient(135deg, var(--rojo) 0%, #600 100%);
+            padding: 25px; border-radius: 22px; border: 1px solid var(--dorado);
+            box-shadow: var(--sombra); margin-bottom: 40px;
+            cursor: pointer; transition: 0.4s;
         }
+        .vip-card:hover { transform: translateY(-6px); box-shadow: 0 20px 40px rgba(212,175,55,0.25); }
+        .vip-card h2 { font-family: 'Playfair Display'; font-size: 1.4rem; letter-spacing: 1px; }
 
-        h1 { font-family: 'Playfair Display'; font-size: 2.8rem; text-transform: uppercase; letter-spacing: 2px; }
-        .subtitle { color: var(--dorado); font-weight: 800; letter-spacing: 6px; font-size: 0.9rem; margin-top: 5px; }
-
-        /* ESTRUCTURA DE MENÚS */
-        .category-header { 
-            text-align: left; color: var(--dorado); font-size: 1.2rem; font-weight: 800;
-            margin: 45px 0 20px; border-left: 5px solid var(--dorado); padding-left: 15px;
-            text-transform: uppercase; text-shadow: 2px 2px 4px black;
+        /* SECCIONES Y CURSOS */
+        .cat-title { 
+            text-align: left; color: var(--dorado); font-size: 1.1rem; font-weight: bold;
+            margin: 40px 0 15px; border-left: 4px solid var(--dorado); padding-left: 15px;
+            text-transform: uppercase; letter-spacing: 1px;
         }
 
         .clase-row {
             background: var(--glass);
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
-            padding: 18px 25px; border-radius: 20px;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            padding: 18px 22px; border-radius: 16px;
             display: flex; justify-content: space-between; align-items: center;
-            margin-bottom: 12px; border: 1px solid rgba(255,255,255,0.1);
-            box-shadow: var(--shadow);
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            margin-bottom: 12px; border: 1px solid rgba(255,255,255,0.08);
+            box-shadow: var(--sombra);
+            transition: all 0.3s ease;
         }
-
         .clase-row:hover { 
-            background: rgba(255,255,255,0.12);
-            transform: translateY(-5px) scale(1.02);
+            background: rgba(255,255,255,0.14);
+            transform: translateX(8px);
             border-color: var(--dorado);
         }
 
-        .level-info p { font-size: 1rem; font-weight: 600; }
-        .level-info span { color: var(--dorado); font-size: 0.8rem; font-weight: 400; }
+        .info-nivel { text-align: left; }
+        .info-nivel h3 { font-size: 1.05rem; font-weight: 600; margin-bottom: 3px; }
+        .info-nivel .precio { color: var(--dorado); font-weight: bold; font-size: 0.9rem; }
 
-        .btn-pay {
+        .btn-pagar {
             background: var(--dorado); color: black; border: none;
-            padding: 10px 18px; border-radius: 12px; font-weight: 800; font-size: 0.8rem;
-            cursor: pointer; transition: 0.3s; box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-            text-transform: uppercase;
+            padding: 10px 22px; border-radius: 8px; font-weight: 700;
+            cursor: pointer; transition: 0.3s; box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            text-transform: uppercase; font-size: 0.8rem; letter-spacing: 0.5px;
         }
+        .btn-pagar:hover { background: white; transform: scale(1.05); }
 
-        .btn-pay:hover { background: white; transform: scale(1.1); box-shadow: 0 0 15px var(--dorado); }
-
-        /* IMÁGENES COMPLEMENTARIAS */
-        .gallery-preview { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 50px; }
-        .img-card { height: 160px; border-radius: 20px; overflow: hidden; border: 1px solid rgba(212,175,55,0.2); box-shadow: var(--shadow); }
-        .img-card img { width: 100%; height: 100%; object-fit: cover; }
+        /* GALERÍA DE FOTOS */
+        .galeria-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin: 45px 0; }
+        .galeria-item { 
+            height: 170px; border-radius: 16px; overflow: hidden; 
+            border: 1px solid rgba(212,175,55,0.25); box-shadow: var(--sombra);
+        }
+        .galeria-item img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; }
+        .galeria-item:hover img { transform: scale(1.1); }
 
         /* CONTACTO */
-        .contact-footer { margin-top: 60px; padding-bottom: 50px; text-align: center; }
-        .social-button {
-            display: inline-block; padding: 12px 35px; border-radius: 50px;
-            text-decoration: none; color: white; font-weight: 800; margin: 10px;
-            border: 1px solid var(--dorado); background: rgba(0,0,0,0.5);
-            transition: 0.4s;
+        .footer-contacto { margin-top: 50px; padding: 30px 0; border-top: 1px solid rgba(255,255,255,0.1); }
+        .footer-contacto p { font-size: 0.9rem; margin-bottom: 15px; opacity: 0.8; }
+        .link-social {
+            display: inline-block; padding: 12px 30px; border-radius: 50px;
+            text-decoration: none; font-weight: bold; margin: 8px;
+            transition: 0.3s; border: 1px solid var(--dorado); color: white;
+            background: transparent; font-size: 0.85rem; letter-spacing: 1px;
         }
-        .social-button:hover { background: var(--dorado); color: black; }
+        .link-social:hover { background: var(--dorado); color: black; box-shadow: 0 0 15px rgba(212,175,55,0.4); }
 
+        @media (max-width: 500px) {
+            h1 { font-size: 1.9rem; }
+            .clase-row { padding: 15px; }
+            .btn-pagar { padding: 8px 15px; font-size: 0.75rem; }
+            .galeria-grid { grid-template-columns: 1fr; }
+        }
     </style>
 </head>
 <body>
@@ -114,59 +124,100 @@
     <div class="bg-dinamico"></div>
 
     <div class="container">
-        <header class="brand-box">
-            <img src="LOGO Jackson Bahia oficial.jpg" class="logo-dynamic" alt="Logo Jackson Bahía">
+        <header>
+            <img src="LOGO Jackson Bahia oficial.jpg" class="logo" alt="Logo Jackson Bahía">
             <h1>Jackson Bahía Cia</h1>
-            <p class="subtitle">CLASES DE BACHATA ONLINE</p>
+            <p class="sub-titulo">CLASES DE BACHATA ONLINE</p>
         </header>
 
-        <div class="category-header">Bachata Básicos</div>
-        <div class="clase-row">
-            <div class="level-info"><p>Básicos Nivel 1</p><span>Fundamentos iniciales</span></div>
-            <button class="btn-pay" onclick="location.href='#'">Pagar</button>
-        </div>
-        <div class="clase-row">
-            <div class="level-info"><p>Básicos Nivel 2</p><span>Fluidez y control</span></div>
-            <button class="btn-pay" onclick="location.href='#'">Pagar</button>
-        </div>
-        <div class="clase-row">
-            <div class="level-info"><p>Básicos Nivel 3</p><span>Técnica avanzada</span></div>
-            <button class="btn-pay" onclick="location.href='#'">Pagar</button>
-        </div>
-        <div class="clase-row">
-            <div class="level-info"><p>Básicos Nivel 4</p><span>Nivel Master</span></div>
-            <button class="btn-pay" onclick="location.href='#'">Pagar</button>
+        <div class="vip-card" onclick="pagar('LINK_VIP_TOTAL')">
+            <h2>👑 PASE VIP ACCESO TOTAL</h2>
+            <p style="opacity: 0.85; margin: 6px 0; font-size: 0.9rem;">Todos los niveles y contenidos por 30 días</p>
+            <h2 style="color: var(--dorado);">$60.000</h2>
         </div>
 
-        <div class="category-header">Bachata en Pareja</div>
-        <div class="clase-row"><div class="level-info"><p>Pareja Nivel 1</p></div><button class="btn-pay">Pagar</button></div>
-        <div class="clase-row"><div class="level-info"><p>Pareja Nivel 2</p></div><button class="btn-pay">Pagar</button></div>
-        <div class="clase-row"><div class="level-info"><p>Pareja Nivel 3</p></div><button class="btn-pay">Pagar</button></div>
-        <div class="clase-row"><div class="level-info"><p>Pareja Nivel 4</p></div><button class="btn-pay">Pagar</button></div>
-
-        <div class="category-header">Comprensión Musical</div>
+        <div class="cat-title">Bachata Básicos</div>
         <div class="clase-row">
-            <div class="level-info"><p>Módulo de Musicalidad</p><span>Entiende el ritmo</span></div>
-            <button class="btn-pay">Pagar</button>
+            <div class="info-nivel"><h3>Básicos - Nivel 1</h3><p class="precio">$20.000</p></div>
+            <button class="btn-pagar" onclick="pagar('LINK_BASICO_N1')">Pagar</button>
+        </div>
+        <div class="clase-row">
+            <div class="info-nivel"><h3>Básicos - Nivel 2</h3><p class="precio">$20.000</p></div>
+            <button class="btn-pagar" onclick="pagar('LINK_BASICO_N2')">Pagar</button>
+        </div>
+        <div class="clase-row">
+            <div class="info-nivel"><h3>Básicos - Nivel 3</h3><p class="precio">$25.000</p></div>
+            <button class="btn-pagar" onclick="pagar('LINK_BASICO_N3')">Pagar</button>
+        </div>
+        <div class="clase-row">
+            <div class="info-nivel"><h3>Básicos - Nivel 4</h3><p class="precio">$25.000</p></div>
+            <button class="btn-pagar" onclick="pagar('LINK_BASICO_N4')">Pagar</button>
         </div>
 
-        <div class="category-header">Shines (Pasos Sueltos)</div>
-        <div class="clase-row"><div class="level-info"><p>Shines Nivel 1</p></div><button class="btn-pay">Pagar</button></div>
-        <div class="clase-row"><div class="level-info"><p>Shines Nivel 2</p></div><button class="btn-pay">Pagar</button></div>
-        <div class="clase-row"><div class="level-info"><p>Shines Nivel 3</p></div><button class="btn-pay">Pagar</button></div>
-        <div class="clase-row"><div class="level-info"><p>Shines Nivel 4</p></div><button class="btn-pay">Pagar</button></div>
-
-        <div class="gallery-preview">
-            <div class="img-card"><img src="WhatsApp Image 2026-04-26 at 7.45.25 PM.jpeg"></div>
-            <div class="img-card"><img src="IMG_20141012_162154_869.jpg"></div>
+        <div class="cat-title">Bachata en Pareja</div>
+        <div class="clase-row">
+            <div class="info-nivel"><h3>Parejas - Nivel 1</h3><p class="precio">$25.000</p></div>
+            <button class="btn-pagar" onclick="pagar('LINK_PAREJA_N1')">Pagar</button>
+        </div>
+        <div class="clase-row">
+            <div class="info-nivel"><h3>Parejas - Nivel 2</h3><p class="precio">$30.000</p></div>
+            <button class="btn-pagar" onclick="pagar('LINK_PAREJA_N2')">Pagar</button>
+        </div>
+        <div class="clase-row">
+            <div class="info-nivel"><h3>Parejas - Nivel 3</h3><p class="precio">$30.000</p></div>
+            <button class="btn-pagar" onclick="pagar('LINK_PAREJA_N3')">Pagar</button>
+        </div>
+        <div class="clase-row">
+            <div class="info-nivel"><h3>Parejas - Nivel 4</h3><p class="precio">$40.000</p></div>
+            <button class="btn-pagar" onclick="pagar('LINK_PAREJA_N4')">Pagar</button>
         </div>
 
-        <footer class="contact-footer">
-            <a href="https://instagram.com/jacksonbahiaok" target="_blank" class="social-button">INSTAGRAM</a>
-            <a href="https://wa.me/542914220136" target="_blank" class="social-button">WHATSAPP</a>
-            <p style="margin-top: 30px; font-size: 0.7rem; opacity: 0.5;">© 2026 Jackson Bahía Cia - Professional Dance Training</p>
+        <div class="cat-title">Teoría y Ritmo</div>
+        <div class="clase-row">
+            <div class="info-nivel"><h3>Comprensión Musical</h3><p class="precio">$20.000</p></div>
+            <button class="btn-pagar" onclick="pagar('LINK_COMPRENSION_MUSICAL')">Pagar</button>
+        </div>
+
+        <div class="cat-title">Bachata Shines (Pasos Sueltos)</div>
+        <div class="clase-row">
+            <div class="info-nivel"><h3>Shines - Nivel 1</h3><p class="precio">$20.000</p></div>
+            <button class="btn-pagar" onclick="pagar('LINK_SHINES_N1')">Pagar</button>
+        </div>
+        <div class="clase-row">
+            <div class="info-nivel"><h3>Shines - Nivel 2</h3><p class="precio">$20.000</p></div>
+            <button class="btn-pagar" onclick="pagar('LINK_SHINES_N2')">Pagar</button>
+        </div>
+        <div class="clase-row">
+            <div class="info-nivel"><h3>Shines - Nivel 3</h3><p class="precio">$25.000</p></div>
+            <button class="btn-pagar" onclick="pagar('LINK_SHINES_N3')">Pagar</button>
+        </div>
+        <div class="clase-row">
+            <div class="info-nivel"><h3>Shines - Nivel 4</h3><p class="precio">$25.000</p></div>
+            <button class="btn-pagar" onclick="pagar('LINK_SHINES_N4')">Pagar</button>
+        </div>
+
+        <div class="galeria-grid">
+            <div class="galeria-item"><img src="WhatsApp Image 2026-04-26 at 7.45.25 PM.jpeg" alt="Clase Bachata"></div>
+            <div class="galeria-item"><img src="IMG_20141012_162154_869.jpg" alt="Parejas Bachata"></div>
+        </div>
+
+        <footer class="footer-contacto">
+            <p>¿Tienes alguna consulta? Contáctanos de forma directa:</p>
+            <a href="https://instagram.com/jacksonbahiaok" target="_blank" class="link-social">INSTAGRAM</a>
+            <a href="https://wa.me/542914220136" target="_blank" class="link-social">WHATSAPP</a>
+            <p style="margin-top: 35px; font-size: 0.75rem; opacity: 0.4; letter-spacing: 1px;">© 2026 JACKSON BAHÍA CIA. TODOS LOS DERECHOS RESERVADOS</p>
         </footer>
     </div>
 
+    <script>
+        function pagar(urlPago) {
+            // Reemplaza 'urlPago' por tus enlaces reales de pago cuando los tengas listos
+            if (urlPago.startsWith('LINK_')) {
+                alert("Redireccionando al link de pago correspondiente...");
+            } else {
+                window.open(urlPago, '_blank');
+            }
+        }
+    </script>
 </body>
 </html>
