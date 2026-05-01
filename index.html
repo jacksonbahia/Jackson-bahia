@@ -6,30 +6,29 @@
 
 <title>Jackson Bahia Cia</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700;900&display=swap" rel="stylesheet">
 
 <style>
+
 body{
 margin:0;
 font-family:Poppins;
 color:white;
 background:
-linear-gradient(rgba(10,10,15,0.85), rgba(10,10,15,0.95)),
+linear-gradient(rgba(10,10,15,0.9), rgba(10,10,15,0.95)),
 url('https://images.unsplash.com/photo-1514512364185-4c2bff2d8c52?auto=format&fit=crop&w=1600&q=80');
 background-size:cover;
 background-position:center;
 }
 
-/* LOGO */
+/* NAV */
 .logo{
 position:fixed;
 top:20px;
-left:20px;
-font-size:30px;
-font-weight:900;
-background:linear-gradient(45deg,#ff00cc,#3333ff);
--webkit-background-clip:text;
-color:transparent;
+left:30px;
+font-size:26px;
+font-weight:700;
+letter-spacing:2px;
 }
 
 /* HERO */
@@ -40,55 +39,83 @@ flex-direction:column;
 justify-content:center;
 align-items:center;
 text-align:center;
+padding:20px;
 }
 
 .hero h1{
-font-size:70px;
+font-size:80px;
 font-weight:900;
-background:linear-gradient(45deg,#ff00cc,#3333ff);
--webkit-background-clip:text;
-color:transparent;
+letter-spacing:4px;
 }
 
 .hero h2{
-font-size:28px;
+font-size:24px;
+font-weight:300;
+margin-top:10px;
+opacity:0.8;
 }
 
 /* LOGIN */
-#loginBox input{
-padding:10px;
+#loginBox{
+margin-top:30px;
+}
+
+input{
+padding:12px;
 margin:5px;
+border-radius:30px;
 border:none;
-border-radius:5px;
+width:180px;
 }
 
 .btn{
-background:#ff00cc;
+background:white;
+color:black;
 border:none;
-padding:8px 15px;
-color:white;
+padding:10px 20px;
+border-radius:30px;
 cursor:pointer;
-border-radius:20px;
+font-weight:600;
+transition:0.3s;
 }
 
-/* CURSOS */
+.btn:hover{
+background:#ff00cc;
+color:white;
+}
+
+/* SECCION */
 .section{
-padding:40px;
-max-width:900px;
+max-width:1000px;
 margin:auto;
+padding:60px 20px;
 }
 
+/* TARJETAS */
 .curso{
-margin-bottom:30px;
+margin-bottom:60px;
+}
+
+.curso h2{
+margin-bottom:15px;
+font-weight:600;
+letter-spacing:1px;
 }
 
 .nivel{
 display:flex;
 justify-content:space-between;
+align-items:center;
 background:rgba(255,255,255,0.05);
-padding:10px;
-margin:5px 0;
-border-radius:8px;
+padding:15px;
+margin:10px 0;
+border-radius:12px;
+backdrop-filter:blur(5px);
+transition:0.3s;
+}
+
+.nivel:hover{
+background:rgba(255,255,255,0.1);
 }
 
 /* MODAL */
@@ -99,24 +126,37 @@ top:0;
 left:0;
 width:100%;
 height:100%;
-background:rgba(0,0,0,0.9);
+background:rgba(0,0,0,0.95);
 justify-content:center;
 align-items:center;
 }
 
 .modal-content{
 background:#111;
-padding:20px;
-border-radius:10px;
+padding:30px;
+border-radius:15px;
 text-align:center;
+max-width:400px;
 }
 
 /* FOOTER */
 footer{
 text-align:center;
-padding:20px;
-background:#111;
+padding:30px;
+border-top:1px solid rgba(255,255,255,0.1);
 }
+
+footer a{
+color:white;
+margin:10px;
+text-decoration:none;
+opacity:0.7;
+}
+
+footer a:hover{
+opacity:1;
+}
+
 </style>
 </head>
 
@@ -133,7 +173,6 @@ background:#111;
 <input id="pass" type="password" placeholder="Contraseña">
 <button class="btn" onclick="login()">Ingresar</button>
 </div>
-
 </div>
 
 <div class="section">
@@ -170,7 +209,7 @@ background:#111;
 <h3>Panel de Pago</h3>
 <p>
 Titular: PIMENTEL DIEGO ANTONIO<br>
-Alias: JACKSON.BAHIA<br>
+Alias: JACKSON.BAHIA<br><br>
 Enviar comprobante a:<br>
 <b>2914220136</b>
 </p>
@@ -179,32 +218,30 @@ Enviar comprobante a:<br>
 </div>
 
 <footer>
-<p>WhatsApp: 2914220136</p>
+<a href="#">Instagram</a>
+<a href="https://wa.me/542914220136">WhatsApp</a>
 </footer>
 
 <script>
 
-// MANTENER SESIÓN
-window.onload = function(){
+window.onload=function(){
 if(localStorage.getItem("usuario")){
 document.getElementById("loginBox").style.display="none";
 }
 }
 
-// LOGIN
 function login(){
-let user=document.getElementById("user").value;
+let u=document.getElementById("user").value;
 
-if(user===""){
+if(u===""){
 alert("Ingresá un usuario");
 return;
 }
 
-localStorage.setItem("usuario",user);
+localStorage.setItem("usuario",u);
 document.getElementById("loginBox").style.display="none";
 }
 
-// INVERTIR
 function invertir(){
 let user=localStorage.getItem("usuario");
 
@@ -216,7 +253,6 @@ return;
 document.getElementById("modal").style.display="flex";
 }
 
-// CERRAR
 function cerrar(){
 document.getElementById("modal").style.display="none";
 }
