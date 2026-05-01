@@ -3,54 +3,77 @@
 <head>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Jackson Bahía Cia | Academia</title>
+    <title>Jackson Bahía Cia | Academia de Bachata</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Plus+Jakarta+Sans:wght@400;700&display=swap" rel="stylesheet"/>
     <style>
         :root { --rojo: #C8102E; --dorado: #D4AF37; --oscuro: #0a0a0a; --crema: #f8f1e7; }
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
         
-        body { background-color: var(--oscuro); color: var(--crema); }
+        body { background-color: var(--oscuro); color: var(--crema); line-height: 1.6; }
 
+        /* FONDO TRASLÚCIDO CON TU FOTO */
         .bg-dinamico {
             position: fixed; inset: 0; z-index: -1;
-            background: linear-gradient(to bottom, rgba(0,0,0,0.8), rgba(0,0,0,0.9)),
-                        url('https://images.unsplash.com/photo-1547153760-18fc86324498?auto=format&fit=crop&q=80&w=2000');
-            background-size: cover; background-position: center;
+            /* Aquí usamos tu foto jack.jpeg con un degradado oscuro para que se vea traslúcida */
+            background: linear-gradient(to bottom, rgba(0,0,0,0.7), rgba(0,0,0,0.9)),
+                        url('jack.jpeg'); 
+            background-size: cover; 
+            background-position: center top;
+            filter: brightness(0.8);
         }
 
-        .container { max-width: 600px; margin: 0 auto; padding: 40px 20px; text-align: center; }
+        .container { max-width: 650px; margin: 0 auto; padding: 40px 20px; position: relative; }
         
-        h1 { font-family: 'Playfair Display'; font-size: 2.5rem; color: var(--dorado); margin-bottom: 30px; text-transform: uppercase; }
+        header { text-align: center; margin-bottom: 40px; }
+        h1 { font-family: 'Playfair Display'; font-size: 2.5rem; color: var(--dorado); text-transform: uppercase; letter-spacing: 2px; text-shadow: 2px 2px 10px rgba(0,0,0,0.5); }
 
-        /* BOTON VIP */
         .vip-banner {
-            background: linear-gradient(135deg, var(--rojo), #000);
-            padding: 25px; border-radius: 20px; border: 2px solid var(--dorado); margin-bottom: 30px;
+            background: linear-gradient(135deg, rgba(200, 16, 46, 0.9), rgba(0,0,0,0.8));
+            padding: 30px; border-radius: 20px; border: 2px solid var(--dorado); 
+            text-align: center; margin-bottom: 40px; box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+            backdrop-filter: blur(5px);
         }
+        .vip-banner h2 { font-family: 'Playfair Display'; margin-bottom: 10px; font-size: 1.8rem; }
+        .vip-banner .precio-vip { font-size: 2.5rem; font-weight: 800; margin: 15px 0; color: #fff; }
 
-        .categoria-title { 
-            text-align: left; border-left: 4px solid var(--dorado); 
-            padding-left: 15px; margin: 30px 0 15px; 
-            font-family: 'Playfair Display'; font-size: 1.4rem; 
+        .categoria-header { 
+            background: rgba(212, 175, 55, 0.15); padding: 12px 20px; 
+            border-left: 5px solid var(--dorado); margin: 45px 0 20px;
+            font-family: 'Playfair Display'; font-size: 1.5rem; color: var(--dorado);
+            text-transform: uppercase; backdrop-filter: blur(3px);
         }
 
         .nivel-row {
             display: flex; justify-content: space-between; align-items: center;
-            background: rgba(255,255,255,0.05); padding: 15px; border-radius: 12px; 
-            margin-bottom: 10px; border: 1px solid rgba(255,255,255,0.1);
+            background: rgba(20, 20, 20, 0.7); padding: 20px; border-radius: 18px; 
+            margin-bottom: 15px; border: 1px solid rgba(255,255,255,0.1);
+            transition: all 0.3s ease; backdrop-filter: blur(10px);
         }
+        .nivel-row:hover { background: rgba(212, 175, 55, 0.1); border-color: var(--dorado); transform: translateY(-2px); }
 
-        .btn { 
-            padding: 12px 20px; border-radius: 8px; border: none; 
-            font-weight: 800; cursor: pointer; text-transform: uppercase; font-size: 0.8rem;
-        }
+        .btn { padding: 12px 22px; border-radius: 12px; border: none; font-weight: 800; cursor: pointer; text-transform: uppercase; font-size: 0.75rem; transition: 0.3s; }
         .btn-gold { background: var(--dorado); color: black; }
         .btn-red { background: var(--rojo); color: white; }
 
-        /* MODAL */
-        .modal { position: fixed; inset: 0; background: rgba(0,0,0,0.98); display: none; align-items: center; justify-content: center; z-index: 1000; }
-        .modal-content { width: 95%; max-width: 800px; }
-        .v-cont { position: relative; padding-bottom: 56.25%; height: 0; background: #000; }
+        /* FOOTER CON FOTO GRUPAL */
+        .footer-social { 
+            margin-top: 60px; text-align: center; padding: 40px 20px; 
+            background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), url('grupal.jpeg');
+            background-size: cover; background-position: center;
+            border-radius: 20px; border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .social-links { display: flex; justify-content: center; gap: 15px; margin-top: 20px; flex-wrap: wrap; }
+        .social-links a { 
+            color: white; text-decoration: none; font-weight: bold; 
+            padding: 12px 25px; border: 1px solid var(--dorado); border-radius: 50px; 
+            font-size: 0.9rem; transition: 0.3s; background: rgba(0,0,0,0.7);
+        }
+        .social-links a:hover { background: var(--dorado); color: black; }
+
+        .modal { position: fixed; inset: 0; background: rgba(0,0,0,0.98); display: none; align-items: center; justify-content: center; z-index: 2000; }
+        .modal-content { width: 95%; max-width: 900px; }
+        .v-cont { position: relative; padding-bottom: 56.25%; height: 0; background: #000; border-radius: 15px; overflow: hidden; }
         .v-cont iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
     </style>
 </head>
@@ -59,92 +82,12 @@
     <div class="bg-dinamico"></div>
 
     <div class="container">
-        <h1>Jackson Bahía Cia</h1>
+        <header>
+            <p style="letter-spacing: 5px; font-size: 0.7rem; color: var(--dorado); font-weight: bold;">ACADEMIA ELITE</p>
+            <h1>Jackson Bahía Cia</h1>
+        </header>
 
         <div class="vip-banner">
-            <h2 style="color: var(--dorado)">👑 MEMBRESÍA VIP TOTAL</h2>
-            <p style="margin: 10px 0; font-size: 0.9rem;">Todo el contenido ilimitado por 30 días</p>
-            <div style="font-size: 1.8rem; font-weight: 800; margin-bottom: 15px;">$60.000</div>
-            <button class="btn btn-gold" onclick="abrirPago('VIP', 'https://link.uala.com.ar/VIP')">Invertir en todo</button>
-        </div>
-
-        <div id="lista-cursos"></div>
-
-        <div style="margin-top: 50px; display: flex; gap: 10px; justify-content: center;">
-            <a href="https://wa.me/TUNUMERO" style="color:white; text-decoration:none;">WhatsApp</a> |
-            <a href="https://instagram.com/TUUSER" style="color:white; text-decoration:none;">Instagram</a>
-        </div>
-    </div>
-
-    <div id="vModal" class="modal">
-        <div class="modal-content">
-            <div class="v-cont" id="player"></div>
-            <button onclick="cerrarV()" class="btn btn-red" style="width:100%; border-radius:0;">CERRAR CLASE</button>
-        </div>
-    </div>
-
-    <script>
-        // CONFIGURACIÓN DE TUS CURSOS
-        const cursos = [
-            { id: 'mus', cat: 'Musicalidad', n: 'Comprendiendo la Musicalidad', p: '20.000', vid: 'dQw4w9WgXcQ', pl: false, link: 'https://link.uala.com.ar/mus' },
-            { id: 'b1', cat: 'Básicos', n: 'Nivel 1 (10 videos)', p: '20.000', vid: 'ID_PLAYLIST', pl: true, link: 'https://link.uala.com.ar/b1' },
-            { id: 'p1', cat: 'Pareja', n: 'Pareja Nivel 1 (5 clases)', p: '25.000', vid: 'ID_PLAYLIST', pl: true, link: 'https://link.uala.com.ar/p1' }
-        ];
-
-        // Guardar qué compró en esta sesión (se borra al cerrar el navegador)
-        let misAccesos = JSON.parse(sessionStorage.getItem('compras')) || [];
-
-        function render() {
-            const cont = document.getElementById('lista-cursos');
-            cont.innerHTML = '';
-            let currentCat = '';
-
-            cursos.forEach(c => {
-                if(c.cat !== currentCat) {
-                    cont.innerHTML += `<div class="categoria-title">${c.cat}</div>`;
-                    currentCat = c.cat;
-                }
-                
-                const yaCompro = misAccesos.includes(c.id) || misAccesos.includes('VIP');
-
-                cont.innerHTML += `
-                    <div class="nivel-row">
-                        <div style="text-align: left;">
-                            <h3 style="font-size: 1rem;">${c.n}</h3>
-                            <span style="font-size: 0.8rem; color: ${yaCompro ? '#2ecc71' : '#888'}">
-                                ${yaCompro ? '✅ Acceso Activo' : '$' + c.p}
-                            </span>
-                        </div>
-                        <button class="btn ${yaCompro ? 'btn-red' : 'btn-gold'}" 
-                                onclick="${yaCompro ? `ver('${c.vid}', ${c.pl})` : `abrirPago('${c.id}', '${c.link}')`}">
-                            ${yaCompro ? 'VER CLASE' : 'INVERTIR'}
-                        </button>
-                    </div>`;
-            });
-        }
-
-        function abrirPago(id, link) {
-            if(confirm("Serás redirigido al pago. Una vez realizado, el acceso se activará en este dispositivo.")) {
-                window.open(link, '_blank');
-                // Habilitamos el curso (Simulación de pago exitoso)
-                misAccesos.push(id);
-                sessionStorage.setItem('compras', JSON.stringify(misAccesos));
-                render();
-            }
-        }
-
-        function ver(id, esLista) {
-            const url = esLista ? `https://www.youtube.com/embed?listType=playlist&list=${id}&autoplay=1` : `https://www.youtube.com/embed/${id}?autoplay=1`;
-            document.getElementById('player').innerHTML = `<iframe src="${url}" allowfullscreen allow="autoplay"></iframe>`;
-            document.getElementById('vModal').style.display = 'flex';
-        }
-
-        function cerrarV() {
-            document.getElementById('vModal').style.display = 'none';
-            document.getElementById('player').innerHTML = '';
-        }
-
-        render();
-    </script>
-</body>
-</html>
+            <h2>👑 ACCESO TOTAL VIP</h2>
+            <p>Formación completa y acceso de por vida.</p>
+            <div class="precio-vip">$60.000</div>
